@@ -13,7 +13,7 @@ ansible-playbook \
     --connection docker \
     --inventory "${CONTAINER_NAME}," \
     -e "ansible_python_interpreter=python3.10" \
-    -e "host_role=Docker AIO" \
+    -e "host_role='Docker AIO'" \
     site.yml
 
 docker commit "${CONTAINER_NAME}" "${IMAGE}:latest"
