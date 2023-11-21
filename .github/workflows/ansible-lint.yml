@@ -1,0 +1,20 @@
+---
+name: ansible-lint
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * *"
+
+jobs:
+  ansible_lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: install pre-commit
+        run: python3.11 -m pip install --user pre-commit
+      - name: run ansible-lint
+        run: pre-commit run ansible-lint --all-files
