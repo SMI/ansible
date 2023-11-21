@@ -8,6 +8,10 @@ on:
   schedule:
     - cron: "0 6 * * *"
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   ansible_lint:
     runs-on: ubuntu-22.04
