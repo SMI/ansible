@@ -66,3 +66,8 @@ Here are some sample inventory files to get started.
 ## Style Guide
 
 -   Variable naming: `smi_<role-name>_...`
+
+## Misc. Notes
+
+-   To help ease integration with Ansible, we use the default Python version on
+    the target OS. For Ubuntu 22.04, this is Python 3.10
