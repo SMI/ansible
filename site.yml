@@ -16,7 +16,7 @@
     - 02-docker-services
   tags: [never, docker]
 - name: Run service-software role on specified hosts
-  hosts: service_software
+  hosts: service_software,smi_aio_build
   roles:
     - 10-service-software
   tags: [software]
