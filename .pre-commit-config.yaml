@@ -1,4 +1,8 @@
 ---
+ci:
+  # NOTE(rkm 2023-11-21) ansible-lint exceeds pre-commit.ci free tier size, so we run it via GitHub Actions
+  skip: [ansible-lint]
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: "v4.5.0"
