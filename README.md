@@ -1,3 +1,5 @@
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/SMI/playbook/main.svg)](https://results.pre-commit.ci/latest/github/SMI/playbook/main)
+
 # SMI Playbook
 
 ⚠ This repo is in early development ⚠
