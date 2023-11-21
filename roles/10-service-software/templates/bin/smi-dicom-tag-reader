@@ -1,0 +1,5 @@
+#!/usr/bin/env python3
+# {{ ansible_managed }}
+import _smi_wrapper as w
+
+w.run(w.FILE_LOAD_CONFIG)

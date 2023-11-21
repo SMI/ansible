@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# {{ ansible_managed }}
+
+set -euo pipefail
+
+if [[ $# -lt 2 ]]; then
+    echo "Error: Usage $0 proj-id uid-file [options]"
+    exit 1
+fi
+
+# shellcheck source=/dev/null
+. _smi-load-env.bash
+
+set -x
+"{{ smi_service_software_install_dir }}/software/SmiServices/v${SMI_SMISERVICES_VERSION:?}/smi/smi" \
+    extract-images \
+    -y "${env_dir:?}/file_extract_services.yaml" \
+    -p "$1" \
+    -c "$2" \
+    "${@:3}"

@@ -1,0 +1,19 @@
+---
+smi_system_packages_install_list:
+  - default-jre
+  - git
+  - htop
+  - python3.11
+  - python3.11-venv
+  - tmux
+  - unzip
+  - vim
+
+smi_system_journald_options:
+  Storage: persistent
+  SystemMaxUse: 4G
+
+smi_system_motd_disabled_scripts:
+  - 10-help-text
+  - 90-updates-available
+  - 98-reboot-required

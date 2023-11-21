@@ -1,0 +1,22 @@
+---
+- name: Run preflight role on all hosts
+  hosts: all
+  gather_facts: true
+  roles:
+    - 00-preflight
+  tags: [always]
+- name: Run system role on all hosts
+  hosts: all
+  roles:
+    - 01-system
+  tags: [system]
+- name: Start Docker services
+  hosts: docker
+  roles:
+    - 02-docker-services
+  tags: [never, docker]
+- name: Run service-software role on specified hosts
+  hosts: service_software
+  roles:
+    - 10-service-software
+  tags: [software]

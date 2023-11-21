@@ -1,0 +1,10 @@
+---
+- name: Template /etc/systemd/journald.conf
+  become: true
+  ansible.builtin.template:
+    src: journald.conf.j2
+    dest: /etc/systemd/journald.conf
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+  notify: "system : Restart journald"

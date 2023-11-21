@@ -1,0 +1,13 @@
+---
+- name: Install packages
+  become: true
+  ansible.builtin.package:
+    name: "{{ smi_system_packages_install_list }}"
+    state: present
+    update_cache: true
+
+- name: Import journald.yml
+  ansible.builtin.import_tasks: journald.yml
+
+- name: Import motd.yml
+  ansible.builtin.import_tasks: motd.yml

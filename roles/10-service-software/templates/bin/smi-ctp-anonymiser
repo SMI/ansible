@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# {{ ansible_managed }}
+
+set -euo pipefail
+
+# shellcheck source=/dev/null
+. _smi-load-env.bash
+
+set -x
+java -jar "{{ smi_service_software_install_dir }}/software/SmiServices/v${SMI_SMISERVICES_VERSION:?}/CTPAnonymiser-portable-1.0.0.jar" \
+    -y "{{ smi_service_software_install_dir }}/configs/${SMI_ENV:?}/file_extract_services.yaml" \
+    -a "{{ smi_service_software_install_dir }}/configs/${SMI_ENV:?}/ctp.config.xml"

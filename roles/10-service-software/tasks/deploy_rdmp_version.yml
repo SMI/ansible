@@ -1,0 +1,68 @@
+---
+- name: Set rdmp_version_data
+  ansible.builtin.set_fact:
+    rdmp_version_data: "{{ smi_service_software_rdmp[rdmp_version_or_sha] }}"
+    rdmp_software_version_dir: "{{ smi_service_software_install_dir }}/software/RDMP/v{{ rdmp_version_or_sha }}"
+
+- name: Insert versions into raw package names
+  ansible.builtin.set_fact:
+    rdmp_packages: >-
+      {{ rdmp_packages | default([]) + [{
+        'url':
+          'https://github.com/HicServices/RDMP/releases/download/v' + rdmp_version_or_sha + '/' +
+          (item.name | replace('<VERSION>', rdmp_version_or_sha)),
+        'checksum': item.checksum,
+      }] }}
+  with_items: "{{ rdmp_version_data.release_packages_raw }}"
+
+- name: Create rdmp_tempdir
+  ansible.builtin.tempfile:
+    state: directory
+    suffix: rdmp
+  register: rdmp_tempdir
+  notify: "service_software : Delete rdmp_tempdir"
+
+- name: Download rdmp packages
+  ansible.builtin.get_url:
+    url: "{{ item.url }}"
+    dest: "{{ rdmp_tempdir.path }}"
+    checksum: "{{ item.checksum }}"
+    mode: u=rw,g=r,o=r
+  with_items: "{{ rdmp_packages }}"
+
+- name: Find downloaded packages
+  ansible.builtin.find:
+    path: "{{ rdmp_tempdir.path }}"
+    file_type: file
+  register: find_result
+
+- name: Unpack packages
+  ansible.builtin.unarchive:
+    src: "{{ item.path }}"
+    dest: "{{ rdmp_tempdir.path }}"
+    remote_src: true
+  with_items: "{{ find_result.files }}"
+
+- name: Remove unused files and directories
+  become: true
+  ansible.builtin.file:
+    path: "{{ rdmp_tempdir.path }}/rdmp-{{ rdmp_version_or_sha }}-cli-linux/{{ item }}"
+    state: absent
+  with_items: "{{ smi_service_software_rdmp_file_blocklist }}"
+
+- name: Copy rdmp-cli binary to destination
+  become: true
+  ansible.builtin.copy:
+    src: "{{ rdmp_tempdir.path }}/rdmp-{{ rdmp_version_or_sha }}-cli-linux/"
+    dest: "{{ rdmp_software_version_dir }}/rdmp-cli/"
+    mode: preserve
+    remote_src: true
+
+- name: Set file permissions
+  become: true
+  ansible.builtin.file:
+    path: "{{ rdmp_software_version_dir }}/"
+    owner: root
+    group: root
+    mode: u=rX,g=rX,o=rX
+    recurse: true
