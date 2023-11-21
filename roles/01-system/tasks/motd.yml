@@ -4,12 +4,18 @@
     that: hostvars[inventory_hostname]['host_role'] | default('') | length > 0
     msg: "'host_role' must be set for this host"
 
+- name: Stat /etc/default/motd-news
+  ansible.builtin.stat:
+    path: "/etc/default/motd-news"
+  register: motd_news_stat_result
+
 - name: Disable dynamic motd news
   become: true
   ansible.builtin.lineinfile:
-    path: /etc/default/motd-news
+    path: "/etc/default/motd-news"
     regexp: "^ENABLED="
     line: ENABLED=0
+  when: motd_news_stat_result.stat.exists
 
 - name: Stat smi_system_motd_disabled_scripts
   ansible.builtin.stat:
