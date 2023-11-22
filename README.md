@@ -12,18 +12,40 @@ Automated deployment of the SMI software stack.
 
 ## Usage
 
-### Ansible
+The `site.yaml` file contains a playbook which can deploy to a provided
+inventory.
 
-TBC
+Included in the repo are two convenience methods to execute the playbook without
+an inventory.
+
+### Local
+
+```console
+$ ./bin/local-deploy
+```
+
+will execute the playbook with the install directory set to `~/opt/epcc/smi`.
+
+You may also need to add your system to the supported list, e.g.:
+
+```diff
+--- a/roles/00-preflight/defaults/main.yml
++++ b/roles/00-preflight/defaults/main.yml
+@@ -4,3 +4,4 @@ smi_preflight_allow_create_group: false
+
+ smi_preflight_supported_systems:
+   - "Ubuntu-22.04"
++  - "Rocky-9.3"
+```
 
 ### Docker
 
-This repo contains a script which can be used to build an AIO ("all-in-one")
-Docker image of the SMI software stack. This does not include any dependent
-services such as RabbitMQ however.
+```console
+$ ./bin/build-docker-aio
+```
 
-Run `./bin/build-docker-aio` to build the image locally. This may take some time
-to build.
+will launch a docker image and execute the playbook against it. If the playbook
+succeeds, the image will be saved and tagged as `smi/aio:latest`.
 
 ## Developing
 
