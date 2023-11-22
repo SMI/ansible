@@ -45,15 +45,6 @@
     group: root
     mode: u=rw,g=r,o=r
 
-- name: Template configs/env.bash
-  become: true
-  ansible.builtin.template:
-    src: configs/env.bash
-    dest: "{{ smi_service_software_install_dir }}/configs/env.bash"
-    owner: root
-    group: root
-    mode: u=rw,g=r,o=r
-
 - name: Template service scripts to bin
   become: true
   ansible.builtin.template:
