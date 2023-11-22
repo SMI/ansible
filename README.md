@@ -22,8 +22,8 @@ This repo contains a script which can be used to build an AIO ("all-in-one")
 Docker image of the SMI software stack. This does not include any dependent
 services such as RabbitMQ however.
 
-Run `./bin/build-aio` to build the image locally. This may take some time to
-build.
+Run `./bin/build-docker-aio` to build the image locally. This may take some time
+to build.
 
 ## Developing
 
