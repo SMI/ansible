@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
 # {{ ansible_managed }}
-import _smi_wrapper as w
+import _smi_wrapper as wrapper
 
-w.run_smiservices(w.FILE_EXTRACT_CONFIG)
+wrapper.run_smiservices(wrapper.FILE_EXTRACT_CONFIG)

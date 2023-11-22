@@ -1,13 +1,15 @@
-#!/usr/bin/env bash
-
+#!/usr/bin/env python3
 # {{ ansible_managed }}
+import os
 
-set -euo pipefail
+import _smi_wrapper as wrapper
 
-# shellcheck source=/dev/null
-. _smi-load-env.bash
-
-set -x
-java -jar "{{ smi_service_software_install_dir }}/software/SmiServices/v${SMI_SMISERVICES_VERSION:?}/CTPAnonymiser-portable-1.0.0.jar" \
-    -y "{{ smi_service_software_install_dir }}/configs/${SMI_ENV:?}/file_extract_services.yaml" \
-    -a "{{ smi_service_software_install_dir }}/configs/${SMI_ENV:?}/ctp.config.xml"
+wrapper_args, env, config_dir = wrapper.init()
+config_path = os.path.join(config_dir, wrapper.FILE_EXTRACT_CONFIG)
+allowlist_path = os.path.join(config_dir, "ctp.config.xml")
+ctp_jar = (
+    f"{wrapper.INSTALL_DIR}/software/SmiServices/v{env['SMI_SMISERVICES_VERSION']}/"
+    "CTPAnonymiser-portable-1.0.0.jar"
+)
+cmd = ("java", "-jar", ctp_jar, "-y", config_path, "-a", allowlist_path)
+wrapper.run(wrapper_args, cmd, env)
