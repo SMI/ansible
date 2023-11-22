@@ -4,6 +4,19 @@ TBC.
 
 ## Development Setup
 
+Requirements are listed in `requirements.txt`. It's usually best to use a Python
+virtual environment, e.g.:
+
+```console
+$ python3.10 -m venv venv
+$ . venv/bin/activate
+[venv] $ pip install --upgrade -r requirements.txt
+...
+```
+
+To help ease integration with Ansible, we use the default Python version on the
+target OS. For Ubuntu 22.04, this is Python 3.10.
+
 ### pre-commit
 
 This repo uses [pre-commit](https://pre-commit.com) to install and automatically
@@ -66,8 +79,3 @@ Here are some sample inventory files to get started.
 ## Style Guide
 
 -   Variable naming: `smi_<role-name>_...`
-
-## Misc. Notes
-
--   To help ease integration with Ansible, we use the default Python version on
-    the target OS. For Ubuntu 22.04, this is Python 3.10
