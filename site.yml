@@ -6,7 +6,7 @@
     - 00-preflight
   tags: [always]
 - name: Run system role on all hosts
-  hosts: all
+  hosts: all:!localhost
   roles:
     - 01-system
   tags: [system]
@@ -16,7 +16,7 @@
     - 02-docker-services
   tags: [never, docker]
 - name: Run service-software role on specified hosts
-  hosts: service_software,smi_aio_build
+  hosts: service_software,smi_aio_build,localhost
   roles:
     - 10-service-software
   tags: [software]
