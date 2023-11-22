@@ -63,7 +63,10 @@ def run(
         )
 
     for _ in range(wrapper_args.copies):
-        check_call(cmd, env=env)
+        try:
+            check_call(cmd, env=env)
+        except KeyboardInterrupt:
+            pass
 
 
 def run_smiservices(config_name: str) -> None:
