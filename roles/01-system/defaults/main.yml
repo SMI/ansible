@@ -17,3 +17,5 @@ smi_system_motd_disabled_scripts:
   - 10-help-text
   - 90-updates-available
   - 98-reboot-required
+
+smi_system_contact_email: "<None>"
