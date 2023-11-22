@@ -2,4 +2,4 @@
 # {{ ansible_managed }}
 import _smi_wrapper as w
 
-w.run(w.FILE_LOAD_CONFIG)
+w.run_smiservices(w.FILE_LOAD_CONFIG)

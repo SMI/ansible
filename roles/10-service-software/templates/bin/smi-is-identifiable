@@ -1,13 +1,5 @@
-#!/usr/bin/env bash
-
+#!/usr/bin/env python3
 # {{ ansible_managed }}
+import _smi_wrapper as w
 
-set -euo pipefail
-
-# shellcheck source=/dev/null
-. _smi-load-env.bash
-
-set -x
-"{{ smi_service_software_install_dir }}/software/SmiServices/v${SMI_SMISERVICES_VERSION:?}/smi/smi" \
-    is-identifiable \
-    -y "{{ smi_service_software_install_dir }}/configs/${SMI_ENV:?}/file_extract_services.yaml"
+w.run_smiservices(w.FILE_EXTRACT_CONFIG)

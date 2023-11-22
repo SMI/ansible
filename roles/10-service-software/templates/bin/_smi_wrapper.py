@@ -21,7 +21,7 @@ def _env_from(file_path: str) -> dict[str, str]:
     return env
 
 
-def run(config: str) -> int:
+def run_smiservices(config: str) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--quiet", action="store_true")
     parser.add_argument("--detach", action="store_true")
