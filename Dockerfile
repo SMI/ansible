@@ -4,6 +4,7 @@ RUN : \
     && apt-get update -qq \
     && DEBIAN_FRONTEND=noninteractive apt-get install \
         -qq -y --no-install-recommends \
+        ca-certificates \
         python3.10 \
         sudo \
     && apt-get clean \
