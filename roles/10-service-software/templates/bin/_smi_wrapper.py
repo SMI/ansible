@@ -68,7 +68,8 @@ def run(
     cmd = (*cmd, *remaining_argv)
 
     if not wrapper_args.quiet:
-        print(f"Executing {wrapper_args.copies}x:")
+        if wrapper_args.copies > 1:
+            print(f"Executing {wrapper_args.copies} detached instances of:")
         subprocess.check_call(("echo", "$", *cmd))
 
     if wrapper_args.detach:
