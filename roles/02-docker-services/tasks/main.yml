@@ -2,6 +2,7 @@
 - name: Create and start services
   community.docker.docker_compose:
     project_name: smi
+    state: "{{ smi_docker_services_state }}"
     definition:
       version: "3.7"
       services:
@@ -30,11 +31,4 @@
           image: redis:latest
           ports:
             - 6379:6379
-
-- name: Enable MongoDB replication
-  community.docker.docker_container_exec:
-    container: mongodb
-    command: mongosh --eval 'rs.initiate();'
-  register: mongo_result
-  changed_when: "'Using a default configuration' in mongo_result.stdout"
-  failed_when: "mongo_result.rc != 0 and 'already initialized' not in mongo_result.stderr"
+  notify: "docker_services : Enable MongoDB replication"

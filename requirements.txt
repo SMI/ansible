@@ -1,2 +1,6 @@
 ansible
+docker
+docker-compose
 jmespath
+# https://github.com/yaml/pyyaml/issues/724
+PyYAML>=5.3.1,!=5.4.0,!=5.4.1

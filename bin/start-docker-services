@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euxo pipefail
+
+ansible-playbook \
+    --connection local \
+    --inventory "localhost," \
+    -e "ansible_python_interpreter=$(command -v python || true)" \
+    -e "smi_preflight_group_name=${USER}" \
+    -e "smi_docker_services_state=present" \
+    --tags docker \
+    "${@}" \
+    site.yml

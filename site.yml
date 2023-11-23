@@ -11,7 +11,7 @@
     - 01-system
   tags: [system]
 - name: Start Docker services
-  hosts: docker
+  hosts: all
   roles:
     - 02-docker-services
   tags: [never, docker]
