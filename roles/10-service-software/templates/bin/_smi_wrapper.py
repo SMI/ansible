@@ -50,6 +50,7 @@ def run(
     env: dict[str, str],
 ) -> None:
     if not wrapper_args.quiet:
+        print(f"Executing {wrapper_args.copies}x:")
         subprocess.check_call(("echo", "$", *cmd))
 
     if wrapper_args.detach:
