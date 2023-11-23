@@ -1,5 +1,4 @@
 import argparse
-import functools
 import os
 import subprocess
 import sys
@@ -53,18 +52,21 @@ def run(
     if not wrapper_args.quiet:
         subprocess.check_call(("echo", "$", *cmd))
 
-    check_call = subprocess.check_call
     if wrapper_args.detach:
-        check_call = functools.partial(
-            subprocess.check_call,
-            start_new_session=True,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-        )
-
-    for _ in range(wrapper_args.copies):
+        for _ in range(wrapper_args.copies):
+            subprocess.Popen(
+                cmd,
+                env=env,
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+    else:
         try:
-            check_call(cmd, env=env)
+            subprocess.check_call(
+                cmd,
+                env=env,
+            )
         except KeyboardInterrupt:
             pass
 
