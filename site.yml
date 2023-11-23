@@ -6,7 +6,7 @@
     - 00-preflight
   tags: [always]
 - name: Run system role on all hosts
-  hosts: all:!localhost
+  hosts: all,!localhost
   roles:
     - 01-system
   tags: [system]
