@@ -38,7 +38,7 @@ You may also need to add your system to the supported list, e.g.:
 +  - "Rocky-9.3"
 ```
 
-### Docker
+### Docker AIO
 
 ```console
 $ ./bin/build-docker-aio
@@ -46,6 +46,17 @@ $ ./bin/build-docker-aio
 
 will launch a docker image and execute the playbook against it. If the playbook
 succeeds, the image will be saved and tagged as `smi/aio:latest`.
+
+### Docker Services
+
+Also included are scripts to start/stop containers with the services we depend
+on (e.g., MongoDB):
+
+```console
+$ ./bin/start-docker-services
+...
+$ ./bin/stop-docker-services
+```
 
 ## Developing
 
