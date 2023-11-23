@@ -4,6 +4,8 @@
     container: mongodb
     command: mongosh --eval 'rs.initiate();'
   when: smi_docker_services_state == 'present'
+  retries: 2
+  delay: 5
   register: mongodb_result
   changed_when: "'Using a default configuration' in mongodb_result.stdout"
   failed_when: "mongodb_result.rc != 0 and 'already initialized' not in mongodb_result.stderr"
