@@ -3,6 +3,7 @@ import os
 import subprocess
 import sys
 
+
 INSTALL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 FILE_LOAD_CONFIG = "file_load_services.yaml"
@@ -92,8 +93,10 @@ def run(
 def run_smiservices(config_name: str, single_instance: bool = False) -> None:
     wrapper_args, remaining_argv, env, config_dir = init()
 
-    if wrapper_args.copies > 1 and single_instance:
-        raise ValueError("Cannot start more than one copy of this service")
+    if (wrapper_args.copies > 1 or wrapper_args.detach) and single_instance:
+        raise ValueError(
+            "Cannot start more than one copy of this service, or run it detached",
+        )
 
     config_path = os.path.join(config_dir, config_name)
     smi_bin = (
