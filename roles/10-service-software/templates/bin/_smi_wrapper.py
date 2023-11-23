@@ -1,3 +1,4 @@
+# {{ ansible_managed }}
 import argparse
 import os
 import subprocess

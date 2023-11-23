@@ -110,3 +110,12 @@ repos:
     hooks:
       - id: shellcheck
         args: [--enable=all]
+  # Local
+  - repo: local
+    hooks:
+      - id: ansible-managed-in-templates
+        name: ansible-managed-in-templates
+        entry: .meta/ansible-managed-in-templates
+        language: system
+        files: "^roles/.*/templates/.*$"
+        types: [text]
