@@ -3,7 +3,7 @@ import os
 import subprocess
 import sys
 
-INSTALL_DIR = "{{ smi_service_software_install_dir }}"
+INSTALL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 FILE_LOAD_CONFIG = "file_load_services.yaml"
 FILE_EXTRACT_CONFIG = "file_extract_services.yaml"
 
