@@ -58,3 +58,10 @@ MongoDbPopulatorOptions:
     AutoAck: false
   MongoDbFlushTime: 30 # Seconds
   FailedWriteLimit: 5
+
+DicomReprocessorOptions:
+  ProcessingMode: "ImageReprocessing"
+  ReprocessingProducerOptions:
+    ExchangeName: "IdentifiableImageExchange"
+    MaxConfirmAttempts: 5
+  SleepTime: 0 # ms
