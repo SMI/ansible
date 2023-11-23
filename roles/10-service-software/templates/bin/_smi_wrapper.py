@@ -72,8 +72,12 @@ def run(
             pass
 
 
-def run_smiservices(config_name: str) -> None:
+def run_smiservices(config_name: str, single_instance: bool = False) -> None:
     wrapper_args, env, config_dir = init()
+
+    if wrapper_args.copies > 1 and single_instance:
+        raise ValueError("Cannot start more than one copy of this service")
+
     config_path = os.path.join(config_dir, config_name)
     smi_bin = (
         f"{INSTALL_DIR}/software/SmiServices/v{env['SMI_SMISERVICES_VERSION']}/smi/smi"

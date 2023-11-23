@@ -2,4 +2,4 @@
 # {{ ansible_managed }}
 import _smi_wrapper as wrapper
 
-wrapper.run_smiservices(wrapper.FILE_EXTRACT_CONFIG)
+wrapper.run_smiservices(wrapper.FILE_EXTRACT_CONFIG, single_instance=True)
