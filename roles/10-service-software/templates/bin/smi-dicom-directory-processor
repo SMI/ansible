@@ -1,21 +1,5 @@
-#!/usr/bin/env bash
-
+#!/usr/bin/env python3
 # {{ ansible_managed }}
+import _smi_wrapper as wrapper
 
-set -euo pipefail
-
-if [[ $# -lt 1 ]]; then
-    echo "Error: Usage $0 pacs-dir [options]"
-    exit 1
-fi
-
-# shellcheck source=/dev/null
-. _smi-load-env.bash
-
-set -x
-"{{ smi_service_software_install_dir }}/software/SmiServices/v${SMI_SMISERVICES_VERSION:?}/smi/smi" \
-    dicom-directory-processor \
-    -y "${env_dir:?}/file_load_services.yaml" \
-    -f PACS \
-    -d "$1" \
-    "${@:3}"
+wrapper.run_smiservices(wrapper.FILE_LOAD_CONFIG, single_instance=True)

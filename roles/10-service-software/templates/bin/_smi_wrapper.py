@@ -4,6 +4,7 @@ import subprocess
 import sys
 
 INSTALL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
 FILE_LOAD_CONFIG = "file_load_services.yaml"
 FILE_EXTRACT_CONFIG = "file_extract_services.yaml"
 
@@ -19,12 +20,25 @@ def _env_from(file_path: str) -> dict[str, str]:
     return env
 
 
-def init() -> tuple[argparse.Namespace, dict[str, str], str]:
+def init() -> tuple[argparse.Namespace, list[str], dict[str, str], str]:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--quiet", action="store_true")
-    parser.add_argument("--detach", action="store_true")
-    parser.add_argument("--copies", type=int, default=1)
-    wrapper_args = parser.parse_args()
+    wrapper_group = parser.add_argument_group("Wrapper args")
+    wrapper_group.add_argument("--quiet", action="store_true")
+    wrapper_group.add_argument(
+        "--detach",
+        action="store_true",
+        help="Launch service(s) in detached mode and exit",
+    )
+    wrapper_group.add_argument(
+        "--copies",
+        type=int,
+        default=1,
+        help=(
+            "Launch multiple copies of the service. "
+            "Implies --detached when value is greater than 1"
+        ),
+    )
+    wrapper_args, remaining_argv = parser.parse_known_args()
 
     if wrapper_args.copies > 1:
         wrapper_args.detach = True
@@ -41,14 +55,17 @@ def init() -> tuple[argparse.Namespace, dict[str, str], str]:
 
     config_dir = f"{INSTALL_DIR}/configs/{smi_env}"
 
-    return (wrapper_args, env, config_dir)
+    return (wrapper_args, remaining_argv, env, config_dir)
 
 
 def run(
     wrapper_args: argparse.Namespace,
+    remaining_argv: list[str],
     cmd: tuple[str, ...],
     env: dict[str, str],
 ) -> None:
+    cmd = (*cmd, *remaining_argv)
+
     if not wrapper_args.quiet:
         print(f"Executing {wrapper_args.copies}x:")
         subprocess.check_call(("echo", "$", *cmd))
@@ -73,7 +90,7 @@ def run(
 
 
 def run_smiservices(config_name: str, single_instance: bool = False) -> None:
-    wrapper_args, env, config_dir = init()
+    wrapper_args, remaining_argv, env, config_dir = init()
 
     if wrapper_args.copies > 1 and single_instance:
         raise ValueError("Cannot start more than one copy of this service")
@@ -84,4 +101,4 @@ def run_smiservices(config_name: str, single_instance: bool = False) -> None:
     )
     app_name = sys.argv[0].split("smi-")[1].split(".py")[0]
     cmd = (smi_bin, app_name, "-y", config_path)
-    run(wrapper_args, cmd, env)
+    run(wrapper_args, remaining_argv, cmd, env)

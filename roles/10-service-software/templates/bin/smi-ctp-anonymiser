@@ -4,7 +4,7 @@ import os
 
 import _smi_wrapper as wrapper
 
-wrapper_args, env, config_dir = wrapper.init()
+args, remaining_argv, env, config_dir = wrapper.init()
 config_path = os.path.join(config_dir, wrapper.FILE_EXTRACT_CONFIG)
 allowlist_path = os.path.join(config_dir, "ctp.config.xml")
 ctp_jar = (
@@ -12,4 +12,4 @@ ctp_jar = (
     "CTPAnonymiser-portable-1.0.0.jar"
 )
 cmd = ("java", "-jar", ctp_jar, "-y", config_path, "-a", allowlist_path)
-wrapper.run(wrapper_args, cmd, env)
+wrapper.run(args, remaining_argv, cmd, env)
