@@ -65,3 +65,21 @@ DicomReprocessorOptions:
     ExchangeName: "IdentifiableImageExchange"
     MaxConfirmAttempts: 5
   SleepTime: 0 # ms
+
+# TODO(rkm 2023-11-27) Check against live config
+IdentifierMapperOptions:
+  QueueName: "IdentifiableImageQueue"
+  QoSPrefetchCount: 1000
+  AutoAck: false
+  AnonImagesProducerOptions:
+    ExchangeName: "AnonymousImageExchange"
+    MaxConfirmAttempts: 1
+  MappingConnectionString: "{{ smi_service_software_patient_id_map_connection_string }}"
+  MappingDatabaseType: "MySQL"
+  MappingTableName: "smi.MappingTable"
+  TimeoutInSeconds: 600
+  SwapColumnName: "CHI"
+  ReplacementColumnName: "EUPI"
+  SwapperType: "Microservices.IdentifierMapper.Execution.Swappers.TableLookupWithGuidFallbackSwapper"
+  AllowRegexMatching: false
+  RedisConnectionString: "{{ smi_service_software_patient_id_cache_connection_string }}"

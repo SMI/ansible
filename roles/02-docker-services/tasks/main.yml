@@ -1,5 +1,5 @@
 ---
-- name: Create and start services
+- name: Start or stop services
   community.docker.docker_compose:
     project_name: smi
     state: "{{ smi_docker_services_state }}"
