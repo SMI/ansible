@@ -70,9 +70,9 @@
         state: directory
         mode: u=rwx,g=rwxs,o=
   roles:
-    - 10-0-install-dir
-    - 10-1-bins
-    - 10-2-configs
-    - 10-3-data
-    - 10-4-software
+    - 10-install-dir
+    - 11-bins
+    - 12-configs
+    - 13-data
+    - 14-software
   tags: [software]
