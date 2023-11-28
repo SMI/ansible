@@ -1,0 +1,24 @@
+---
+- name: Stat smi_service_software_install_dir
+  ansible.builtin.stat:
+    path: "{{ smi_service_software_install_dir }}"
+  register: stat_result
+  failed_when: not stat_result.stat.exists and not smi_service_software_allow_create_install_dir
+
+- name: Ensure subdirectories exists
+  become: true
+  ansible.builtin.file:
+    name: "{{ smi_service_software_install_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: u=rwx,g=rx,o=rx
+
+- name: Template README.md
+  become: true
+  ansible.builtin.template:
+    src: root_readme.md
+    dest: "{{ smi_service_software_install_dir }}/README.md"
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r

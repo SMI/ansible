@@ -1,7 +1,4 @@
 ---
-smi_service_software_install_dir: /opt/epcc/smi
-smi_service_software_allow_create_install_dir: false
-
 smi_service_software_smiservices_default_version: "5.4.0"
 smi_service_software_smiservices:
   "5.4.0":
@@ -30,21 +27,3 @@ smi_service_software_rdmp:
 smi_service_software_rdmp_file_blocklist:
   - Databases.yaml
   - NLog.config
-
-# Override this with an absolute path to a local directory of configs
-smi_service_software_local_configs_template_dir: templates/configs
-
-smi_service_software_logs_dir: /tmp/epcc/smi/logs
-smi_service_software_allow_create_logs_dir: false
-
-smi_service_software_pacs_dir: /tmp/epcc/smi/PACS
-smi_service_software_allow_create_pacs_dir: false
-
-smi_service_software_extract_dir: /tmp/epcc/smi/extract
-smi_service_software_allow_create_extract_dir: false
-
-smi_service_software_tessdata_version_or_sha: "4.1.0"
-smi_service_software_tessdat_checksum: "md5:57e0df3d84fed9fbf8c7a8e589f8f012"
-
-smi_service_software_patient_id_map_connection_string: "Server=localhost;Uid=root;Pwd=myStrongPassw0rd!;"
-smi_service_software_patient_id_cache_connection_string: "localhost"

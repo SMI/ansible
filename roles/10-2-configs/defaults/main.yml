@@ -1,0 +1,3 @@
+---
+# Override this with an absolute path to a local directory of configs
+smi_service_software_local_configs_template_dir: templates

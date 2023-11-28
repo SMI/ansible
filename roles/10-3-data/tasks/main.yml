@@ -1,0 +1,20 @@
+---
+- name: Ensure data directories exist
+  become: true
+  ansible.builtin.file:
+    name: "{{ smi_service_software_install_dir }}/{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: u=rwx,g=rx,o=rx
+  with_items:
+    - data
+    - data/tessdata
+
+- name: Ensure tessdata exists
+  become: true
+  ansible.builtin.get_url:
+    url: https://github.com/tesseract-ocr/tessdata/raw/{{ smi_service_software_tessdata_version_or_sha }}/eng.traineddata
+    dest: "{{ smi_service_software_install_dir }}/data/tessdata/"
+    checksum: "{{ smi_service_software_tessdat_checksum }}"
+    mode: u=rw,g=r,o=r
