@@ -11,12 +11,12 @@
     - 01-system
   tags: [system]
 - name: Start Docker services
-  hosts: all
+  hosts: docker_host
   roles:
     - 02-docker-services
   tags: [never, docker]
 - name: Install service software on primary file server
-  hosts: primary_file_server,smi_aio_build
+  hosts: file_server
   pre_tasks:
     - name: Assert required variables are defined
       ansible.builtin.assert:
