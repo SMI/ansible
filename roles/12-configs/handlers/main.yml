@@ -1,7 +1,8 @@
 ---
+# TODO(rkm 2023-11-29) Move to own role?
 - name: "service_software : Upload changed RabbitMQ configs"
   ansible.builtin.uri:
-    url: "http://{{ smi_service_software_rabbitmq_hostname }}:15672/api/definitions"
+    url: "http://{{ smi_configs_rabbitmq_hostname }}:15672/api/definitions"
     method: "POST"
     src: "{{ item.dest }}"
     body_format: "json"

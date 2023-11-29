@@ -1,6 +1,8 @@
 ---
-smi_service_software_smiservices_default_version: "5.4.0"
-smi_service_software_smiservices:
+smi_software_software_dir: "{{ smi_g_install_dir | default('/tmp/epcc/smi') }}/software"
+
+smi_software_smiservices_default_version: "5.4.0"
+smi_software_smiservices:
   "5.4.0":
     release_packages_raw:
       - name: smi-services-v<VERSION>-linux-x64.tgz
@@ -12,18 +14,18 @@ smi_service_software_smiservices:
     source_tar_checksum: "md5:426147dc2c622700a2f474ef2dfbc3ec"
     files_from_source:
       - "src/applications/SRAnonTool/CTP_SRAnonTool.sh"
-smi_service_software_smiservices_file_blocklist:
+smi_software_smiservices_file_blocklist:
   - default.yaml
   - DynamicRules.txt
   - Rules.template.yaml
   - Smi.NLog.config
 
-smi_service_software_rdmp_default_version: "8.1.0"
-smi_service_software_rdmp:
+smi_software_rdmp_default_version: "8.1.0"
+smi_software_rdmp:
   "8.1.0":
     release_packages_raw:
       - name: rdmp-<VERSION>-cli-linux-x64.tar.xz
         checksum: "sha256:D3272CD6684B09AE295723138F124F570C28DC05D055CCC480A20B4F2992E638"
-smi_service_software_rdmp_file_blocklist:
+smi_software_rdmp_file_blocklist:
   - Databases.yaml
   - NLog.config

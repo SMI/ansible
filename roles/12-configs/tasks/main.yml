@@ -1,22 +1,8 @@
 ---
-- name: Set service facts
-  ansible.builtin.set_fact:
-    smi_service_software_rabbitmq_hostname: "{{ groups['rabbitmq'][0] | default('localhost') }}"
-    smi_service_software_mongodb_hostname: "{{ groups['mongodb'][0] | default('localhost') }}"
-    smi_service_software_rdmp_catalogue_conn_str: "{{
-      groups['rdmp'][0] |
-      default('server=localhost;uid=SA;password=smiMsSql1.;database=RDMP_Catalogue;Encrypt=false') }}"
-    smi_service_software_rdmp_data_export_conn_str: "{{
-      groups['rdmp'][0] |
-      default('server=localhost;uid=SA;password=smiMsSql1.;database=RDMP_DataExport;Encrypt=false') }}"
-    # TODO(rkm 2023-11-28) Template these two like the variables above
-    smi_service_software_patient_id_map_connection_string: "Server=localhost;Uid=root;Pwd=myStrongPassw0rd!;"
-    smi_service_software_patient_id_cache_connection_string: "localhost"
-
 - name: Ensure configs directory exists
   become: true
   ansible.builtin.file:
-    name: "{{ smi_service_software_install_dir }}/configs"
+    name: "{{ smi_configs_configs_dir }}"
     state: directory
     owner: root
     group: root
@@ -24,8 +10,8 @@
 
 - name: Check if correct config directories exist
   ansible.builtin.stat:
-    path: "{{ smi_service_software_install_dir }}/configs/{{ item.path }}"
-  with_community.general.filetree: "{{ smi_service_software_local_configs_template_dir }}/"
+    path: "{{ smi_configs_configs_dir }}/{{ item.path }}"
+  with_community.general.filetree: "{{ smi_configs_local_configs_template_dir }}/"
   when: item.state == "directory" and "/" not in item.path
   register: stat_result
 
@@ -33,4 +19,4 @@
   ansible.builtin.include_tasks: deploy_config_dir.yml
   with_items: "{{ stat_result | json_query('results[?!(stat.exists)&&!skipped].item.path') }}"
   loop_control:
-    loop_var: config_name
+    loop_var: env_name

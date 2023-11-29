@@ -5,7 +5,7 @@
   roles:
     - 00-preflight
   tags: [always]
-- name: Run system role on all hosts
+- name: Run system role on all hosts except localhost
   hosts: all,!localhost
   roles:
     - 01-system
@@ -15,64 +15,25 @@
   roles:
     - 02-docker-services
   tags: [never, docker]
-- name: Install service software on specified hosts
-  hosts: service_software,smi_aio_build,localhost
-  run_once: true
-  # TODO(rkm 2023-11-28) Simplify this / move into vars files
+- name: Install service software on primary file server
+  hosts: primary_file_server,smi_aio_build
   pre_tasks:
-    - name: Set facts
-      ansible.builtin.set_fact:
-        smi_service_software_install_dir: "{{ smi_service_software_install_dir | default('/opt/epcc/smi') }}"
-        smi_service_software_allow_create_install_dir: "{{ smi_service_software_allow_create_install_dir | default(false) }}"
-        smi_service_software_logs_dir: "{{ smi_service_software_logs_dir | default('/tmp/epcc/smi/logs') }}"
-        smi_service_software_allow_create_logs_dir: "{{ smi_service_software_allow_create_logs_dir | default(false) }}"
-        smi_service_software_pacs_dir: "{{ smi_service_software_pacs_dir | default('/tmp/epcc/smi/PACS') }}"
-        smi_service_software_allow_create_pacs_dir: "{{ smi_service_software_allow_create_pacs_dir | default(false) }}"
-        smi_service_software_extract_dir: "{{ smi_service_software_extract_dir | default('/tmp/epcc/smi/extract') }}"
-        smi_service_software_allow_create_extract_dir: "{{ smi_service_software_allow_create_extract_dir | default(false) }}"
-    - name: Stat smi_service_software_logs_dir
-      ansible.builtin.stat:
-        path: "{{ smi_service_software_logs_dir }}"
-      register: stat_result
-      failed_when: not stat_result.stat.exists and not smi_service_software_allow_create_logs_dir
-    - name: Create smi_service_software_logs_dir
-      become: true
-      ansible.builtin.file:
-        path: "{{ smi_service_software_logs_dir }}"
-        owner: root
-        group: "{{ smi_preflight_group_name }}"
-        state: directory
-        mode: u=rwx,g=rwxs,o=
-    - name: Stat smi_service_software_pacs_dir
-      ansible.builtin.stat:
-        path: "{{ smi_service_software_pacs_dir }}"
-      register: stat_result
-      failed_when: not stat_result.stat.exists and not smi_service_software_allow_create_pacs_dir
-    - name: Create smi_service_software_pacs_dir
-      become: true
-      ansible.builtin.file:
-        path: "{{ smi_service_software_pacs_dir }}"
-        owner: root
-        group: "{{ smi_preflight_group_name }}"
-        state: directory
-        mode: u=rwx,g=rx,o=
-    - name: Stat smi_service_software_extract_dir
-      ansible.builtin.stat:
-        path: "{{ smi_service_software_extract_dir }}"
-      register: stat_result
-      failed_when: not stat_result.stat.exists and not smi_service_software_allow_create_extract_dir
-    - name: Create smi_service_software_extract_dir
-      become: true
-      ansible.builtin.file:
-        path: "{{ smi_service_software_extract_dir }}"
-        owner: root
-        group: "{{ smi_preflight_group_name }}"
-        state: directory
-        mode: u=rwx,g=rwxs,o=
+    - name: Assert required variables are defined
+      ansible.builtin.assert:
+        that: vars[item] is defined
+        msg: "{{ item }} must be defined"
+      with_items:
+        - smi_fs_software_root
+        - smi_fs_data_root
+      tags: [always]
   roles:
-    - 10-install-dir
-    - 11-bins
-    - 12-configs
-    - 13-data
-    - 14-software
-  tags: [software]
+    - role: 10-base-dirs
+      tags: [always]
+    - role: 11-bins
+      tags: [bins]
+    - role: 12-configs
+      tags: [configs]
+    - role: 13-data
+      tags: [data]
+    - role: 14-software
+      tags: [software]

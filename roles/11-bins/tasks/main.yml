@@ -2,7 +2,7 @@
 - name: Ensure bin directory exists
   become: true
   ansible.builtin.file:
-    name: "{{ smi_service_software_install_dir }}/bin"
+    name: "{{ smi_bins_bin_dir }}"
     state: directory
     owner: root
     group: root
@@ -12,6 +12,6 @@
   become: true
   ansible.builtin.template:
     src: "{{ item }}"
-    dest: "{{ smi_service_software_install_dir }}/bin/"
+    dest: "{{ smi_bins_bin_dir }}"
     mode: u=rwx,g=rx,o=rx
   with_ansible.builtin.fileglob: templates/*
