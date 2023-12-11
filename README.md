@@ -8,7 +8,7 @@ Automated deployment of the SMI software stack.
 
 ## Requirements
 
--   Python 3.10
+- Python 3.10
 
 ## Usage
 
