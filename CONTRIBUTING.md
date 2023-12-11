@@ -45,37 +45,37 @@ Local inventory files named with `inventory/test*` will be ignored by git.
 
 Here are some sample inventory files to get started.
 
--   Azure VM:
+- Azure VM:
 
-    ```yaml
-    [all:vars]
-    ansible_ssh_user=<azure user>
-    ansible_ssh_host=<public IP>
-    ansible_ssh_private_key_file=<ssh key>
+  ```yaml
+  [all:vars]
+  ansible_ssh_user=<azure user>
+  ansible_ssh_host=<public IP>
+  ansible_ssh_private_key_file=<ssh key>
 
-    ; Override variables
-    smi_preflight_group_name=<group name>
+  ; Override variables
+  smi_preflight_group_name=<group name>
 
-    [service_software]
-    azure ansible_host=<IP address> host_role="my test host"
-    ```
+  [service_software]
+  azure ansible_host=<IP address> host_role="my test host"
+  ```
 
--   EIDF VM:
+- EIDF VM:
 
-    ```yaml
-    [all:vars]
-    ansible_ssh_user=<EIDF user>
-    ansible_ssh_common_args="-J <EIDF user>@eidf-gateway.epcc.ed.ac.uk"
-    ansible_ssh_pass="..."
-    ansible_sudo_pass="..."
+  ```yaml
+  [all:vars]
+  ansible_ssh_user=<EIDF user>
+  ansible_ssh_common_args="-J <EIDF user>@eidf-gateway.epcc.ed.ac.uk"
+  ansible_ssh_pass="..."
+  ansible_sudo_pass="..."
 
-    ; Override variables
-    smi_preflight_group_name=<group name>
+  ; Override variables
+  smi_preflight_group_name=<group name>
 
-    [service_software]
-    eidf ansible_host=<IP address> host_role="my test host"
-    ```
+  [service_software]
+  eidf ansible_host=<IP address> host_role="my test host"
+  ```
 
 ## Style Guide
 
--   Variable naming: `smi_<role-name>_...`
+- Variable naming: `smi_<role-name>_...`
