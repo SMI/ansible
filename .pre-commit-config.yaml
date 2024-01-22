@@ -96,7 +96,7 @@ repos:
         args: [--config, .meta/flake8.conf]
   # Ansible
   - repo: https://github.com/ansible/ansible-lint.git
-    rev: "v6.22.1"
+    rev: "v6.22.2"
     hooks:
       - id: ansible-lint
         args:
