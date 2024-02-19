@@ -29,8 +29,8 @@ will execute the playbook with the install directory set to `~/opt/epcc/smi`.
 You may also need to add your system to the supported list, e.g.:
 
 ```diff
---- a/roles/00-preflight/defaults/main.yml
-+++ b/roles/00-preflight/defaults/main.yml
+--- a/roles/00_preflight/defaults/main.yml
++++ b/roles/00_preflight/defaults/main.yml
 @@ -4,3 +4,4 @@ smi_preflight_allow_create_group: false
 
  smi_preflight_supported_systems:
