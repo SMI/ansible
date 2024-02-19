@@ -104,6 +104,7 @@ repos:
         additional_dependencies:
           - ansible
           - jmespath
+        language_version: "3.10"
   # Shell
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: "v0.9.0.6"
