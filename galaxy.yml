@@ -1,12 +1,12 @@
 ---
 namespace: smi
-name: playbook
+name: ansible
 version: 0.1.0
 readme: README.md
 authors:
   - Ruairidh MacLeod (ruairidh@rkm.dev)
-description: SMI playbook collection
+description: SMI Ansible collection
 license:
   - MIT
-repository: https://github.com/SMI/playbook
-issues: https://github.com/SMI/playbook/issues
+repository: https://github.com/SMI/ansible
+issues: https://github.com/SMI/ansible/issues

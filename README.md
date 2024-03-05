@@ -1,6 +1,6 @@
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/SMI/playbook/main.svg)](https://results.pre-commit.ci/latest/github/SMI/playbook/main)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/SMI/ansible/main.svg)](https://results.pre-commit.ci/latest/github/SMI/ansible/main)
 
-# SMI Playbook
+# Ansible
 
 ⚠ This repo is in early development ⚠
 
