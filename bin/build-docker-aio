@@ -22,7 +22,7 @@ ansible-playbook \
     -e "smi_service_software_allow_create_pacs_dir=true" \
     -e "smi_service_software_allow_create_extract_dir=true" \
     "${@}" \
-    site.yml
+    site.yaml
 
 docker commit "${CONTAINER_NAME}" "${IMAGE}:latest"
 docker kill "${CONTAINER_NAME}"

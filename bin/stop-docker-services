@@ -10,4 +10,4 @@ ansible-playbook \
     -e "smi_docker_services_state=absent" \
     --tags docker \
     "${@}" \
-    site.yml
+    site.yaml

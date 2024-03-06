@@ -13,4 +13,4 @@ ansible-playbook \
     -e "smi_service_software_allow_create_pacs_dir=true" \
     -e "smi_service_software_allow_create_extract_dir=true" \
     "${@}" \
-    site.yml
+    site.yaml
