@@ -6,7 +6,7 @@
     - preflight
   tags: [always]
 - name: Run service-software role on specified hosts
-  hosts: software_hosts
+  hosts: "{{ target | default('software_hosts') }}"
   roles:
     - 10_service_software
   tags: [software]
