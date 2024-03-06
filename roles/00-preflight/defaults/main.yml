@@ -4,3 +4,4 @@ smi_preflight_allow_create_group: false
 
 smi_preflight_supported_systems:
   - "Ubuntu-22.04"
+  - "Rocky-9.3" # nocommit

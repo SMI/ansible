@@ -17,6 +17,7 @@
   tags: [never, docker]
 - name: Install service software on primary file server
   hosts: file_server
+  # run_once: true # todo check nocommit
   pre_tasks:
     - name: Assert required variables are defined
       ansible.builtin.assert:

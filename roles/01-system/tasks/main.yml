@@ -5,6 +5,7 @@
     name: "{{ smi_system_packages_install_list }}"
     state: present
     update_cache: true
+  when: false # nocommit
 
 - name: Import journald.yml
   ansible.builtin.import_tasks: journald.yml
