@@ -1,8 +1,37 @@
 ---
-- name: Ensure OS is supported
-  ansible.builtin.assert:
-    that: ansible_distribution + "-" + ansible_distribution_version in preflight_supported_systems
-    msg: '{{ ansible_distribution + "-" + ansible_distribution_version }} not supported. Only: {{ preflight_supported_systems | join(", ") }}'
+- name: Create preflight_software_install_dir
+  become: true
+  ansible.builtin.file:
+    name: "{{ preflight_software_install_dir }}"
+    state: directory
+    owner: "{{ preflight_software_install_dir_owner }}"
+    group: "{{ preflight_software_install_dir_owner }}"
+    mode: u=rwx,g=rx,o=rx
 
-- name: Import check_group.yml
-  ansible.builtin.import_tasks: check_group.yml
+- name: Create preflight_software_install_dir subdirectories
+  become: true
+  ansible.builtin.file:
+    name: "{{ preflight_software_install_dir }}/{{ item }}"
+    state: directory
+    owner: "{{ preflight_software_install_dir_owner }}"
+    group: "{{ preflight_software_install_dir_owner }}"
+    mode: u=rwx,g=rx,o=rx
+  with_items:
+    - bin
+    - configs
+    - data
+    - data/tessdata
+    - software
+
+- name: Template README.md
+  become: true
+  ansible.builtin.template:
+    src: root_readme.md
+    dest: "{{ preflight_software_install_dir }}/README.md"
+    owner: "{{ preflight_software_install_dir_owner }}"
+    group: "{{ preflight_software_install_dir_owner }}"
+    mode: u=rw,g=r,o=r
+
+- name: Set facts for downstream roles
+  ansible.builtin.set_fact:
+    smi_software_install_dir: "{{ preflight_software_install_dir }}"
