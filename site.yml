@@ -1,17 +1,12 @@
 ---
-- name: Run preflight role on all hosts
+- name: Run preflight checks
   hosts: all
   gather_facts: true
   roles:
-    - 00_preflight
+    - preflight
   tags: [always]
-- name: Start Docker services
-  hosts: all
-  roles:
-    - 02_docker_services
-  tags: [never, docker]
 - name: Run service-software role on specified hosts
-  hosts: service_software,smi_aio_build,localhost
+  hosts: software_hosts
   roles:
     - 10_service_software
   tags: [software]
