@@ -5,11 +5,6 @@
   roles:
     - 00_preflight
   tags: [always]
-- name: Run system role on all hosts
-  hosts: all,!localhost
-  roles:
-    - 01_system
-  tags: [system]
 - name: Start Docker services
   hosts: all
   roles:

@@ -1,6 +1,0 @@
-# {{ ansible_managed }}
-
-[Journal]
-{% for k,v in smi_system_journald_options.items() %}
-{{ k }}={{ v }}
-{% endfor %}
