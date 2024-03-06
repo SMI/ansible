@@ -54,7 +54,7 @@ Here are some sample inventory files to get started.
   ansible_ssh_private_key_file=<ssh key>
 
   ; Override variables
-  smi_preflight_group_name=<group name>
+  preflight_group_name=<group name>
 
   [service_software]
   azure ansible_host=<IP address> host_role="my test host"
@@ -70,7 +70,7 @@ Here are some sample inventory files to get started.
   ansible_sudo_pass="..."
 
   ; Override variables
-  smi_preflight_group_name=<group name>
+  preflight_group_name=<group name>
 
   [service_software]
   eidf ansible_host=<IP address> host_role="my test host"

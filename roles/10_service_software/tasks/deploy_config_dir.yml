@@ -13,7 +13,7 @@
   ansible.builtin.file:
     path: "{{ smi_service_software_logs_dir }}/{{ config_name }}"
     owner: root
-    group: "{{ smi_preflight_group_name }}"
+    group: "{{ preflight_group_name }}"
     state: directory
     mode: u=rwx,g=rwxs,o=
 

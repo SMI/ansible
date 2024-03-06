@@ -1,13 +1,13 @@
 ---
-- name: Check if smi_preflight_group_name already exists
+- name: Check if preflight_group_name already exists
   ansible.builtin.getent:
     database: group
-    key: "{{ smi_preflight_group_name }}"
+    key: "{{ preflight_group_name }}"
   register: groups_result
-  failed_when: "'msg' in groups_result and not smi_preflight_allow_create_group"
+  failed_when: "'msg' in groups_result and not preflight_allow_create_group"
 
-- name: Ensure smi_preflight_group_name exists
+- name: Ensure preflight_group_name exists
   become: true
   ansible.builtin.group:
-    name: "{{ smi_preflight_group_name }}"
+    name: "{{ preflight_group_name }}"
     state: present

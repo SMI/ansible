@@ -1,8 +1,8 @@
 ---
 - name: Ensure OS is supported
   ansible.builtin.assert:
-    that: ansible_distribution + "-" + ansible_distribution_version in smi_preflight_supported_systems
-    msg: '{{ ansible_distribution + "-" + ansible_distribution_version }} not supported. Only: {{ smi_preflight_supported_systems | join(", ") }}'
+    that: ansible_distribution + "-" + ansible_distribution_version in preflight_supported_systems
+    msg: '{{ ansible_distribution + "-" + ansible_distribution_version }} not supported. Only: {{ preflight_supported_systems | join(", ") }}'
 
 - name: Import check_group.yml
   ansible.builtin.import_tasks: check_group.yml

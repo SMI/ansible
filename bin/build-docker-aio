@@ -14,8 +14,8 @@ ansible-playbook \
     --inventory "${CONTAINER_NAME}," \
     --limit "${CONTAINER_NAME}" \
     -e "ansible_python_interpreter=python3.10" \
-    -e "smi_preflight_group_name=smi" \
-    -e "smi_preflight_allow_create_group=true" \
+    -e "preflight_group_name=smi" \
+    -e "preflight_allow_create_group=true" \
     -e "host_role='Docker AIO'" \
     -e "smi_service_software_allow_create_install_dir=true" \
     -e "smi_service_software_allow_create_logs_dir=true" \

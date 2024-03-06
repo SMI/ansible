@@ -31,9 +31,9 @@ You may also need to add your system to the supported list, e.g.:
 ```diff
 --- a/roles/00_preflight/defaults/main.yml
 +++ b/roles/00_preflight/defaults/main.yml
-@@ -4,3 +4,4 @@ smi_preflight_allow_create_group: false
+@@ -4,3 +4,4 @@ preflight_allow_create_group: false
 
- smi_preflight_supported_systems:
+ preflight_supported_systems:
    - "Ubuntu-22.04"
 +  - "Rocky-9.3"
 ```

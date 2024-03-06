@@ -1,6 +1,6 @@
 ---
-smi_preflight_group_name: smi
-smi_preflight_allow_create_group: false
+preflight_group_name: smi
+preflight_allow_create_group: false
 
-smi_preflight_supported_systems:
+preflight_supported_systems:
   - "Ubuntu-22.04"
