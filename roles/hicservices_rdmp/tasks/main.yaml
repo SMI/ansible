@@ -9,7 +9,7 @@
 - name: Deploy rdmp-cli versions
   ansible.builtin.script:
     cmd: |
-      deploy_rdmp_cli_version.py \
+      deploy_rdmp_cli.py \
         {{ hicservices_rdmp_base_url }} \
         {{ hicservices_rdmp_install_root }} \
         '{{ hicservices_rdmp_versions | to_json }}'
