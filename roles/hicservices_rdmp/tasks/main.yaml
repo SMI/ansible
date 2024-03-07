@@ -1,0 +1,17 @@
+---
+- name: Create software dir
+  become: true
+  ansible.builtin.file:
+    path: "{{ hicservices_rdmp_install_root }}"
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+
+- name: Deploy rdmp-cli versions
+  ansible.builtin.script:
+    cmd: |
+      deploy_rdmp_cli_version.py \
+        {{ hicservices_rdmp_base_url }} \
+        {{ hicservices_rdmp_install_root }} \
+        '{{ hicservices_rdmp_versions | to_json }}'
+  register: deploy_result
+  changed_when: deploy_result.rc != 0

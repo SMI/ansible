@@ -10,3 +10,8 @@
   roles:
     - smi_smiservices
   tags: [smi_smiservices]
+- name: Deploy rdmp-cli
+  hosts: "{{ target | default('software_host') }}"
+  roles:
+    - hicservices_rdmp
+  tags: [hicservices_rdmp]

@@ -1,0 +1,11 @@
+---
+hicservices_rdmp_base_url: "https://github.com/HicServices/RDMP/releases/download"
+hicservices_rdmp_install_root: "{{ smi_root_software_dir }}/HicServices/RDMP"
+hicservices_rdmp_versions:
+  "8.1.0":
+    packages:
+      - name: rdmp-<VERSION>-cli-linux-x64.tar.xz
+        checksum: "sha256:D3272CD6684B09AE295723138F124F570C28DC05D055CCC480A20B4F2992E638"
+        file_blocklist:
+          - Databases.yaml
+          - NLog.config

@@ -1,5 +1,5 @@
 ---
-- name: Create SmiServices software dir
+- name: Create software dir
   become: true
   ansible.builtin.file:
     path: "{{ smi_smiservices_install_root }}"
