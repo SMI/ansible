@@ -6,17 +6,19 @@
 
 Automated deployment of the SMI software stack.
 
+The roles in this collection can be used to deploy the following software to a remote target:
+
+- [SmiServices](https://github.com/SMI/SmiServices)
+
 ## Requirements
 
 - Python 3.10
 
 ## Usage
 
-The `site.yaml` file contains a playbook which can deploy to a provided
-inventory.
+The `site.yaml` playbook will deploy all configured software to the host(s) in the `software_host` group of your inventory. This can be overridden through the `target` variable e.g., `ansible-playbook ... -e "target=localhost" site.yaml`.
 
-Included in the repo are two convenience methods to execute the playbook without
-an inventory.
+Included in the repo are two convenience scripts to execute this playbook without an inventory.
 
 ### Local
 
@@ -26,19 +28,9 @@ $ ./bin/local-deploy
 
 will execute the playbook with the install directory set to `~/opt/epcc/smi`.
 
-You may also need to add your system to the supported list, e.g.:
+### Docker
 
-```diff
---- a/roles/00_preflight/defaults/main.yml
-+++ b/roles/00_preflight/defaults/main.yml
-@@ -4,3 +4,4 @@ preflight_allow_create_group: false
-
- preflight_supported_systems:
-   - "Ubuntu-22.04"
-+  - "Rocky-9.3"
-```
-
-### Docker AIO
+_WIP_
 
 ```console
 $ ./bin/build-docker-aio
