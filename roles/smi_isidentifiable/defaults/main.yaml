@@ -1,0 +1,20 @@
+---
+smi_isidentifiable_base_url: "https://github.com/SMI/IsIdentifiable/releases/download"
+smi_isidentifiable_install_root: "{{ smi_root_software_dir }}/SMI/IsIdentifiable"
+smi_isidentifiable_versions:
+  "0.3.0":
+    packages:
+      - name: ii-<VERSION>-cli-linux-x64.tar.gz
+        checksum: "md5:c00ecc9b3604beabd6229b7948d69c33"
+        file_blocklist:
+          - theme.yaml
+          - Targets.template.yaml
+          - Rules.template.yaml
+          - ExampleReport.csv
+          - NLog.config
+      - name: IsIdentifiablePlugin.<VERSION>.nupkg
+        checksum: "md5:2cd28a4c5dd6adf73cb6fc21c7124c75"
+      - name: IsIdentifiablePlugin.<VERSION>.symbols.nupkg
+        checksum: "md5:64e4f09faf0e7a7ac0d0dbd2fae4c7a0"
+      - name: smi-nerd-<VERSION>.jar
+        checksum: "md5:e362df6a73d16c27f5c53d484c1650b4"

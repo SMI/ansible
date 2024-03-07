@@ -10,6 +10,8 @@
     - role: configs
       tags: [configs]
     - role: smi_smiservices
-      tags: [smi_smiservices]
+      tags: [smiservices]
+    - role: smi_isidentifiable
+      tags: [isidentifiable]
     - role: hicservices_rdmp
-      tags: [hicservices_rdmp]
+      tags: [rdmp_cli]

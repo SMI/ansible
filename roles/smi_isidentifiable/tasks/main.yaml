@@ -1,0 +1,17 @@
+---
+- name: Create software dir
+  become: true
+  ansible.builtin.file:
+    path: "{{ smi_isidentifiable_install_root }}"
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+
+- name: Deploy IsIdentifiable versions
+  ansible.builtin.script:
+    cmd: |
+      deploy_isidentifiable.py \
+        {{ smi_isidentifiable_base_url }} \
+        {{ smi_isidentifiable_install_root }} \
+        '{{ smi_isidentifiable_versions | to_json }}'
+  register: deploy_result
+  changed_when: deploy_result.rc != 0
