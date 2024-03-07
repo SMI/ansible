@@ -72,9 +72,7 @@ def main() -> int:
                         os.remove(f)
 
             rdmp_cli_dir = glob.glob(f"{tempdir}/rdmp-*/")
-            assert (
-                len(rdmp_cli_dir) == 1
-            ), f"Expected only one match: {rdmp_cli_dir}"
+            assert len(rdmp_cli_dir) == 1, f"Expected only one match: {rdmp_cli_dir}"
             shutil.copytree(rdmp_cli_dir[0], f"{install_dir}/rdmp-cli")
 
     return 0
