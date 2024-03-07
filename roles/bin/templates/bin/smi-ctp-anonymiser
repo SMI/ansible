@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+# {{ ansible_managed }}
+import os
+
+import _smi_wrapper as wrapper
+
+args, remaining_argv, env, config_dir = wrapper.init()
+config_path = os.path.join(config_dir, wrapper.FILE_EXTRACT_CONFIG)
+allowlist_path = os.path.join(config_dir, "ctp.config.xml")
+ctp_jar = (
+    f"{wrapper.INSTALL_DIR}/software/SmiServices/v{env['SMI_SMISERVICES_VERSION']}/"
+    "CTPAnonymiser-portable-1.0.0.jar"
+)
+cmd = ("java", "-jar", ctp_jar, "-y", config_path, "-a", allowlist_path)
+wrapper.run(args, remaining_argv, cmd, env)

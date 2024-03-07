@@ -1,0 +1,8 @@
+---
+- name: Template service scripts to bin
+  become: true
+  ansible.builtin.template:
+    src: "{{ item }}"
+    dest: "{{ smi_root_bin_dir }}/"
+    mode: u=rwx,g=rx,o=rx
+  with_ansible.builtin.fileglob: templates/bin/*
