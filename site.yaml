@@ -3,25 +3,13 @@
   hosts: "{{ target | default('software_host') }}"
   gather_facts: true
   roles:
-    - preflight
-  tags: [always]
-- name: Deploy bins
-  hosts: "{{ target | default('software_host') }}"
-  roles:
-    - bin
-  tags: [bins]
-- name: Deploy configs
-  hosts: "{{ target | default('software_host') }}"
-  roles:
-    - configs
-  tags: [configs]
-- name: Deploy SmiServices
-  hosts: "{{ target | default('software_host') }}"
-  roles:
-    - smi_smiservices
-  tags: [smi_smiservices]
-- name: Deploy rdmp-cli
-  hosts: "{{ target | default('software_host') }}"
-  roles:
-    - hicservices_rdmp
-  tags: [hicservices_rdmp]
+    - role: preflight
+      tags: [always]
+    - role: bin
+      tags: [bin]
+    - role: configs
+      tags: [configs]
+    - role: smi_smiservices
+      tags: [smi_smiservices]
+    - role: hicservices_rdmp
+      tags: [hicservices_rdmp]
