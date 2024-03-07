@@ -63,7 +63,7 @@ def main() -> int:
                 unpacked_dir = glob.glob(f"{tempdir}/{p['name'].split('<')[0]}*/")
                 assert (
                     len(unpacked_dir) == 1
-                ), f"glob matched multiple files: {unpacked_dir}"
+                ), f"Expected only one match: {unpacked_dir}"
                 for blocked in p["file_blocklist"]:
                     for f in glob.glob(
                         f"{unpacked_dir[0]}/**/{blocked}",
@@ -74,7 +74,7 @@ def main() -> int:
             rdmp_cli_dir = glob.glob(f"{tempdir}/rdmp-*/")
             assert (
                 len(rdmp_cli_dir) == 1
-            ), f"glob matched multiple files: {rdmp_cli_dir}"
+            ), f"Expected only one match: {rdmp_cli_dir}"
             shutil.copytree(rdmp_cli_dir[0], f"{install_dir}/rdmp-cli")
 
     return 0

@@ -69,7 +69,7 @@ def main() -> int:
                 unpacked_dir = glob.glob(f"{tempdir}/{p['name'].split('<')[0]}*/")
                 assert (
                     len(unpacked_dir) == 1
-                ), f"glob matched multiple files: {unpacked_dir}"
+                ), f"Expected only one match: {unpacked_dir}"
                 for blocked in p["file_blocklist"]:
                     for f in glob.glob(
                         f"{unpacked_dir[0]}/**/{blocked}",
@@ -81,7 +81,7 @@ def main() -> int:
             smiservices_dir = glob.glob(f"{tempdir}/smi-services*/")
             assert (
                 len(smiservices_dir) == 1
-            ), f"glob matched multiple files: {smiservices_dir}"
+            ), f"Expected only one match: {smiservices_dir}"
             shutil.copytree(smiservices_dir[0], f"{install_dir}/smi")
 
             # Copy CTPAnonymiser
