@@ -73,8 +73,8 @@ def main() -> int:
 
             rdmp_cli_dir = glob.glob(f"{tempdir}/rdmp-*/")
             assert (
-                len(unpacked_dir) == 1
-            ), f"glob matched multiple files: {unpacked_dir}"
+                len(rdmp_cli_dir) == 1
+            ), f"glob matched multiple files: {rdmp_cli_dir}"
             shutil.copytree(rdmp_cli_dir[0], f"{install_dir}/rdmp-cli")
 
     return 0

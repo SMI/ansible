@@ -80,8 +80,8 @@ def main() -> int:
             # Copy SmiServices
             smiservices_dir = glob.glob(f"{tempdir}/smi-services*/")
             assert (
-                len(unpacked_dir) == 1
-            ), f"glob matched multiple files: {unpacked_dir}"
+                len(smiservices_dir) == 1
+            ), f"glob matched multiple files: {smiservices_dir}"
             shutil.copytree(smiservices_dir[0], f"{install_dir}/smi")
 
             # Copy CTPAnonymiser
