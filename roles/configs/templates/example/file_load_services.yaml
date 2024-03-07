@@ -1,0 +1,34 @@
+---
+# {{ ansible_managed }}
+
+RabbitOptions:
+  RabbitMqHostName: "localhost"
+  RabbitMqHostPort: 5672
+  RabbitMqVirtualHost: "smi_{{ config_name }}_file_load"
+  RabbitMqUserName: "guest"
+  RabbitMqPassword: "guest"
+  RabbitMqControlExchangeName: "ControlExchange"
+  FatalLoggingExchange: "FatalLoggingExchange"
+
+LoggingOptions:
+  LogConfigFile: "{{ template_destpath | dirname }}/NLog.config.xml"
+  LogsRoot: "/tmp/smi/logs/{{ config_name }}"
+  TraceLogging: true
+
+FileSystemOptions:
+  FileSystemRoot: "/tmp/smi/PACS"
+  DicomSearchPattern: "*.dcm"
+
+MongoDatabases:
+  DicomStoreOptions:
+    HostName: "localhost"
+    Port: 27017
+    UserName:
+    Password:
+    DatabaseName: "dicom"
+
+ProcessDirectoryOptions:
+  AccessionDirectoryProducerOptions:
+    ExchangeName: "AccessionDirectoryExchange"
+    MaxConfirmAttempts: 1
+# ...

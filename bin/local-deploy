@@ -8,10 +8,6 @@ ansible-playbook \
     -e "ansible_python_interpreter=$(command -v python || true)" \
     -e "ansible_become_user=${USER}" \
     -e "preflight_install_root_dir=${HOME}/opt/epcc/smi" \
-    -e "smi_service_software_allow_create_install_dir=true" \
-    -e "smi_service_software_allow_create_logs_dir=true" \
-    -e "smi_service_software_allow_create_pacs_dir=true" \
-    -e "smi_service_software_allow_create_extract_dir=true" \
     -e "target=localhost" \
     "${@}" \
     site.yaml

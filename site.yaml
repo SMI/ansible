@@ -5,6 +5,11 @@
   roles:
     - preflight
   tags: [always]
+- name: Deploy configs
+  hosts: "{{ target | default('software_host') }}"
+  roles:
+    - configs
+  tags: [configs]
 - name: Deploy SmiServices
   hosts: "{{ target | default('software_host') }}"
   roles:
