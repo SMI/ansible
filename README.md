@@ -9,6 +9,8 @@ Automated deployment of the SMI software stack.
 The roles in this collection can be used to deploy the following software to a remote target:
 
 - [SmiServices](https://github.com/SMI/SmiServices)
+- [IsIdentifiable](https://github.com/SMI/IsIdentifiable)
+- [RDMP CLI](https://github.com/HicServices/RDMP)
 
 ## Requirements
 
