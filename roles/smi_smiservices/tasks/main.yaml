@@ -1,0 +1,17 @@
+---
+- name: Create SmiServices software dir
+  become: true
+  ansible.builtin.file:
+    path: "{{ smi_smiservices_install_root }}"
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+
+- name: Deploy SmiServices versions
+  ansible.builtin.script:
+    cmd: |
+      deploy_smiservices_version.py \
+        {{ smi_smiservices_base_url }} \
+        {{ smi_smiservices_install_root }} \
+        '{{ smi_smiservices_versions | to_json }}'
+  register: deploy_result
+  changed_when: deploy_result.rc != 0

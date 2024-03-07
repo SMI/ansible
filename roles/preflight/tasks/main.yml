@@ -1,37 +1,31 @@
 ---
-- name: Create preflight_software_install_dir
+- name: Create preflight_install_root_dir
   become: true
   ansible.builtin.file:
-    name: "{{ preflight_software_install_dir }}"
+    name: "{{ preflight_install_root_dir }}"
     state: directory
-    owner: "{{ preflight_software_install_dir_owner }}"
-    group: "{{ preflight_software_install_dir_owner }}"
     mode: u=rwx,g=rx,o=rx
 
-- name: Create preflight_software_install_dir subdirectories
+- name: Create preflight_install_root_dir subdirectories
   become: true
   ansible.builtin.file:
-    name: "{{ preflight_software_install_dir }}/{{ item }}"
+    name: "{{ preflight_install_root_dir }}/{{ item }}"
     state: directory
-    owner: "{{ preflight_software_install_dir_owner }}"
-    group: "{{ preflight_software_install_dir_owner }}"
     mode: u=rwx,g=rx,o=rx
   with_items:
     - bin
     - configs
     - data
-    - data/tessdata
     - software
 
 - name: Template README.md
   become: true
   ansible.builtin.template:
     src: root_readme.md
-    dest: "{{ preflight_software_install_dir }}/README.md"
-    owner: "{{ preflight_software_install_dir_owner }}"
-    group: "{{ preflight_software_install_dir_owner }}"
+    dest: "{{ preflight_install_root_dir }}/README.md"
     mode: u=rw,g=r,o=r
 
 - name: Set facts for downstream roles
   ansible.builtin.set_fact:
-    smi_software_install_dir: "{{ preflight_software_install_dir }}"
+    smi_root_dir: "{{ preflight_install_root_dir }}"
+    smi_root_software_dir: "{{ preflight_install_root_dir }}/software"

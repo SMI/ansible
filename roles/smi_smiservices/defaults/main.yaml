@@ -1,0 +1,17 @@
+---
+smi_smiservices_base_url: "https://github.com/SMI/SmiServices/releases/download"
+smi_smiservices_install_root: "{{ smi_root_software_dir }}/SmiServices"
+smi_smiservices_versions:
+  "5.4.0":
+    packages:
+      - name: smi-services-v<VERSION>-linux-x64.tgz
+        checksum: "md5:70464a712005361ef2b494f4682a36f9"
+        file_blocklist:
+          - default.yaml
+          - DynamicRules.txt
+          - Rules.template.yaml
+          - Smi.NLog.config
+      - name: ctpanonymiser-v<VERSION>.zip
+        checksum: "md5:14bb8575afd4b7da9c3ac73cd6179706"
+      - name: SmiServices-<VERSION>-py3-none-any.whl
+        checksum: "md5:c741416cc4ce9e6d9c8a9ff04da9b901"

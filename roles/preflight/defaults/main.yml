@@ -1,3 +1,2 @@
 ---
-preflight_software_install_dir: /opt/epcc/smi
-preflight_software_install_dir_owner: root
+preflight_install_root_dir: /opt/epcc/smi

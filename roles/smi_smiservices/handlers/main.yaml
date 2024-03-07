@@ -1,0 +1,5 @@
+---
+- name: "smi_smiservices : Delete tempdir"
+  ansible.builtin.file:
+    name: "{{ tempdir.path }}"
+    state: absent
