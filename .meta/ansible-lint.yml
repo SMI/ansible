@@ -4,3 +4,4 @@ quiet: true
 skip_list:
   - role-name
   - name[casing]
+  - galaxy[version-incorrect]

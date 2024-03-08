@@ -10,3 +10,4 @@ license:
   - MIT
 repository: https://github.com/SMI/ansible
 issues: https://github.com/SMI/ansible/issues
+tags: [application]
