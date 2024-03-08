@@ -20,15 +20,23 @@ The roles in this collection can be used to deploy the following software to a r
 
 The `site.yaml` playbook will deploy all configured software to the host(s) in the `software_host` group of your inventory. This can be overridden through the `target` variable e.g., `ansible-playbook ... -e "target=localhost" site.yaml`.
 
-Included in the repo are two convenience scripts to execute this playbook without an inventory.
+Included in the repo are convenience scripts to execute this playbook without an inventory.
 
-### Local
+### Local as user
 
 ```console
-$ ./bin/local-deploy
+$ ./bin/deploy-as-user
 ```
 
-will execute the playbook with the install directory set to `~/opt/epcc/smi`.
+will execute the playbook as the current user, with the install directory set to `~/opt/epcc/smi`.
+
+### Local as root
+
+```console
+$ ./bin/deploy-as-root
+```
+
+will execute the playbook as the root, with the install directory set to `/opt/epcc/smi`.
 
 ### Docker
 
