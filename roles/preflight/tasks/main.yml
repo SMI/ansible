@@ -17,6 +17,7 @@
     - configs
     - data
     - software
+    - unmanaged
 
 - name: Template README.md
   become: true
