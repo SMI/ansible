@@ -8,6 +8,7 @@
 
 - name: Deploy SmiServices versions
   become: true
+  environment: "{{ proxy_env | default({}) }}"
   ansible.builtin.script:
     cmd: |
       deploy_smiservices.py \

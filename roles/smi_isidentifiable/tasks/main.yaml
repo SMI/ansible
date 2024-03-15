@@ -8,6 +8,7 @@
 
 - name: Deploy IsIdentifiable versions
   become: true
+  environment: "{{ proxy_env | default({}) }}"
   ansible.builtin.script:
     cmd: |
       deploy_isidentifiable.py \

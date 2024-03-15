@@ -8,6 +8,7 @@
 
 - name: Deploy rdmp-cli versions
   become: true
+  environment: "{{ proxy_env | default({}) }}"
   ansible.builtin.script:
     cmd: |
       deploy_rdmp_cli.py \
