@@ -1,8 +1,15 @@
 ---
+- name: Ensure bin dir exists
+  become: true
+  ansible.builtin.file:
+    name: "{{ preflight_install_root_dir }}/bin"
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+
 - name: Template service scripts to bin
   become: true
   ansible.builtin.template:
     src: "{{ item }}"
-    dest: "{{ smi_root_bin_dir }}/"
+    dest: "{{ preflight_install_root_dir }}/bin/"
     mode: u=rwx,g=rx,o=rx
   with_ansible.builtin.fileglob: templates/bin/*
