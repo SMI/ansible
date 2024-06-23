@@ -1,6 +1,6 @@
 ---
 smi_smiservices_base_url: "https://github.com/SMI/SmiServices/releases/download"
-smi_smiservices_install_root: "{{ smi_root_dir }}/software/SMI/SmiServices"
+smi_smiservices_install_root: "{{ smi_root }}/software/SMI/SmiServices"
 smi_smiservices_versions:
   "5.6.1":
     packages:

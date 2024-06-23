@@ -1,0 +1,14 @@
+---
+- name: Ensure smi_root exists
+  become: true
+  ansible.builtin.file:
+    name: "{{ smi_root }}"
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+
+- name: Template README.md
+  become: true
+  ansible.builtin.template:
+    src: root_readme.md
+    dest: "{{ smi_root }}/README.md"
+    mode: u=rw,g=r,o=r

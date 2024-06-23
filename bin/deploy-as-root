@@ -7,5 +7,6 @@ ansible-playbook \
     --inventory "localhost," \
     -e "ansible_python_interpreter=$(command -v python || true)" \
     -e "target=localhost" \
+    -e "smi_root=/opt/smi" \
     "${@}" \
     site.yaml

@@ -1,9 +1,9 @@
 ---
-- name: Run preflight tasks
+- name: Run all roles
   hosts: "{{ target | default('software_host') }}"
   gather_facts: true
   roles:
-    - role: preflight
+    - role: smi_root
       tags: [always]
     - role: bin
       tags: [bin]
