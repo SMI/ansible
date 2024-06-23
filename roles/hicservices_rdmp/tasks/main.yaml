@@ -1,5 +1,5 @@
 ---
-- name: Create software dir
+- name: Ensure hicservices_rdmp_install_root exists
   become: true
   ansible.builtin.file:
     path: "{{ hicservices_rdmp_install_root }}"

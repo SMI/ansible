@@ -1,8 +1,8 @@
 ---
-- name: Create software dir
+- name: Ensure smi_smiservices_install_root exists
   become: true
   ansible.builtin.file:
-    path: "{{ smi_smiservices_install_root }}"
+    name: "{{ smi_smiservices_install_root }}"
     state: directory
     mode: u=rwx,g=rx,o=rx
 

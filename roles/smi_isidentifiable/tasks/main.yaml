@@ -1,5 +1,5 @@
 ---
-- name: Create software dir
+- name: Ensure smi_isidentifiable_install_root exists
   become: true
   ansible.builtin.file:
     path: "{{ smi_isidentifiable_install_root }}"

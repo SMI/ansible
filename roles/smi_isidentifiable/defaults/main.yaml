@@ -1,6 +1,6 @@
 ---
 smi_isidentifiable_base_url: "https://github.com/SMI/IsIdentifiable/releases/download"
-smi_isidentifiable_install_root: "{{ smi_root_software_dir }}/SMI/IsIdentifiable"
+smi_isidentifiable_install_root: "{{ smi_root_dir }}/software/SMI/IsIdentifiable"
 smi_isidentifiable_versions:
   "0.3.0":
     packages:

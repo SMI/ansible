@@ -6,15 +6,6 @@
     state: directory
     mode: u=rwx,g=rx,o=rx
 
-- name: Create preflight_install_root_dir subdirectories
-  become: true
-  ansible.builtin.file:
-    name: "{{ preflight_install_root_dir }}/{{ item }}"
-    state: directory
-    mode: u=rwx,g=rx,o=rx
-  with_items:
-    - software
-
 - name: Template README.md
   become: true
   ansible.builtin.template:
@@ -25,4 +16,3 @@
 - name: Set facts for downstream roles
   ansible.builtin.set_fact:
     smi_root_dir: "{{ preflight_install_root_dir }}"
-    smi_root_software_dir: "{{ preflight_install_root_dir }}/software"
