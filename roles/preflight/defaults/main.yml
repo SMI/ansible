@@ -1,2 +1,2 @@
 ---
-preflight_install_root_dir: /opt/epcc/smi
+preflight_install_root_dir: /opt/smi

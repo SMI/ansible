@@ -28,7 +28,7 @@ Included in the repo are convenience scripts to execute this playbook without an
 $ ./bin/deploy-as-user
 ```
 
-will execute the playbook as the current user, with the install directory set to `~/opt/epcc/smi`.
+will execute the playbook as the current user, with the install directory set to `~/smi`.
 
 ### Local as root
 
@@ -36,7 +36,7 @@ will execute the playbook as the current user, with the install directory set to
 $ ./bin/deploy-as-root
 ```
 
-will execute the playbook as the root, with the install directory set to `/opt/epcc/smi`.
+will execute the playbook as the root, with the install directory set to `/opt/smi`.
 
 ### Docker
 

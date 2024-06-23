@@ -7,7 +7,7 @@ ansible-playbook \
     --inventory "localhost," \
     -e "ansible_python_interpreter=$(command -v python || true)" \
     -e "ansible_become_user=${USER}" \
-    -e "preflight_install_root_dir=${HOME}/opt/epcc/smi" \
+    -e "preflight_install_root_dir=${HOME}/smi" \
     -e "target=localhost" \
     "${@}" \
     site.yaml
