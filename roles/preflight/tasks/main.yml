@@ -13,7 +13,6 @@
     state: directory
     mode: u=rwx,g=rx,o=rx
   with_items:
-    - data
     - software
 
 - name: Template README.md
