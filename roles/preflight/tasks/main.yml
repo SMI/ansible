@@ -13,7 +13,6 @@
     state: directory
     mode: u=rwx,g=rx,o=rx
   with_items:
-    - configs
     - data
     - software
 
@@ -27,5 +26,4 @@
 - name: Set facts for downstream roles
   ansible.builtin.set_fact:
     smi_root_dir: "{{ preflight_install_root_dir }}"
-    smi_root_configs_dir: "{{ preflight_install_root_dir }}/configs"
     smi_root_software_dir: "{{ preflight_install_root_dir }}/software"

@@ -1,4 +1,11 @@
 ---
+- name: Ensure configs dir exists
+  become: true
+  ansible.builtin.file:
+    name: "{{ preflight_install_root_dir }}/configs"
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+
 - name: Check if correct config directories exist
   ansible.builtin.stat:
     path: "{{ smi_root_dir }}/{{ item.path }}"
