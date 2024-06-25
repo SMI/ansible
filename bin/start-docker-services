@@ -2,10 +2,12 @@
 
 set -euxo pipefail
 
+database="${SMI_DATABASE-postgres}"
+
 ansible-playbook \
     --connection local \
     --inventory "localhost," \
     -e "ansible_python_interpreter=$(command -v python || true)" \
     -e "smi_docker_services_state=present" \
     "${@}" \
-    playbooks/docker_services.yaml
+    "playbooks/docker_services_${database}.yaml"

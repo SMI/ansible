@@ -6,6 +6,7 @@
       community.docker.docker_compose_v2:
         project_name: smi
         state: "{{ services_state | default('present') }}"
+        remove_orphans: true
         definition:
           version: "3.7"
           services:
@@ -22,13 +23,13 @@
               command: mongod --replSet rs0
               ports:
                 - 27017:27017
-            mariadb:
-              container_name: mariadb
-              image: mariadb:latest
+            postgres:
+              container_name: postgres
+              image: postgres:15
               environment:
-                - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-YourStrongPassw0rd}
+                - POSTGRES_HOST_AUTH_METHOD=trust
               ports:
-                - 3306:3306
+                - 5432:5432
             redis:
               container_name: redis
               image: redis:latest

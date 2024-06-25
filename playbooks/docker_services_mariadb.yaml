@@ -1,0 +1,47 @@
+---
+- name: Start or stop services
+  hosts: localhost
+  tasks:
+    - name: Run docker-compose
+      community.docker.docker_compose_v2:
+        project_name: smi
+        state: "{{ services_state | default('present') }}"
+        remove_orphans: true
+        definition:
+          version: "3.7"
+          services:
+            rabbitmq:
+              container_name: rabbitmq
+              image: rabbitmq:management
+              user: rabbitmq
+              ports:
+                - 5672:5672
+                - 15672:15672
+            mongodb:
+              container_name: mongodb
+              image: mongo:latest
+              command: mongod --replSet rs0
+              ports:
+                - 27017:27017
+            mariadb:
+              container_name: mariadb
+              image: mariadb:latest
+              environment:
+                - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-YourStrongPassw0rd}
+              ports:
+                - 3306:3306
+            redis:
+              container_name: redis
+              image: redis:latest
+              ports:
+                - 6379:6379
+    - name: Enable MongoDB replication
+      community.docker.docker_container_exec:
+        container: mongodb
+        command: mongosh --eval 'rs.initiate();'
+      when: smi_docker_services_state == 'present'
+      retries: 2
+      delay: 5
+      register: mongodb_result
+      changed_when: "'Using a default configuration' in mongodb_result.stdout"
+      failed_when: "mongodb_result.rc != 0 and 'already initialized' not in mongodb_result.stderr"

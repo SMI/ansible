@@ -54,6 +54,8 @@ succeeds, the image will be saved and tagged as `smi/aio:latest`.
 Also included are scripts to start/stop containers with the services we depend
 on (e.g., MongoDB):
 
+The default SQL database is PostgreSQL, however we also support MariaDB by setting `SMI_DATABASE=mariadb`.
+
 ```console
 $ ./bin/start-docker-services
 ...
