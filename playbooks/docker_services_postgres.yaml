@@ -8,7 +8,6 @@
         state: "{{ services_state | default('present') }}"
         remove_orphans: true
         definition:
-          version: "3.7"
           services:
             rabbitmq:
               container_name: rabbitmq
