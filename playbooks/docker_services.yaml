@@ -3,7 +3,7 @@
   hosts: localhost
   tasks:
     - name: Run docker-compose
-      community.docker.docker_compose:
+      community.docker.docker_compose_v2:
         project_name: smi
         state: "{{ services_state | default('present') }}"
         definition:
