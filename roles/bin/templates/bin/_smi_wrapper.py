@@ -7,8 +7,8 @@ import sys
 
 INSTALL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
-FILE_LOAD_CONFIG = "file_load_services.yaml"
-FILE_EXTRACT_CONFIG = "file_extract_services.yaml"
+FILE_LOAD_CONFIG = "{{ bin_file_load_config_name }}"
+FILE_EXTRACT_CONFIG = "{{ bin_file_extract_config_name }}"
 
 
 def _env_from(file_path: str) -> dict[str, str]:
