@@ -25,7 +25,7 @@ def _env_from(file_path: str) -> dict[str, str]:
 def init() -> tuple[argparse.Namespace, list[str], dict[str, str], str]:
     parser = argparse.ArgumentParser()
     wrapper_group = parser.add_argument_group("Wrapper args")
-    wrapper_group.add_argument("--quiet", action="store_true")
+    wrapper_group.add_argument("-v", "--verbose", action="store_true")
     wrapper_group.add_argument(
         "--detach",
         action="store_true",
@@ -51,7 +51,7 @@ def init() -> tuple[argparse.Namespace, list[str], dict[str, str], str]:
     assert os.path.isdir(env_dir), f"{env_dir} does not exist"
     env = {**os.environ, **_env_from(f"{env_dir}/env.bash")}
 
-    if not wrapper_args.quiet:
+    if wrapper_args.verbose:
         for var in sorted(x for x in env if x.startswith("SMI_")):
             print(f"{var}={env[var]}")
 
@@ -68,7 +68,7 @@ def run(
 ) -> None:
     cmd = (*cmd, *remaining_argv)
 
-    if not wrapper_args.quiet:
+    if wrapper_args.verbose:
         if wrapper_args.copies > 1:
             print(f"Executing {wrapper_args.copies} detached instances of:")
         subprocess.check_call(("echo", "$", *cmd))
