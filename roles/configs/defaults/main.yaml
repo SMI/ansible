@@ -1,3 +1,6 @@
 ---
+configs_smi_root_dir: "{{ smi_root_dir | default(lookup('env', 'HOME') ~ '/smi') }}"
+configs_configs_dir: "{{ configs_smi_root_dir }}/configs"
+
 # Override this with an absolute path to a local directory of configs
 configs_template_dir: templates/

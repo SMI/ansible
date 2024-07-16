@@ -1,6 +1,8 @@
 ---
+hicservices_rdmp_smi_root_dir: "{{ smi_root_dir | default(lookup('env', 'HOME') ~ '/smi') }}"
+hicservices_rdmp_base_dir: "{{ hicservices_rdmp_smi_root_dir }}/software/HicServices/RDMP"
+
 hicservices_rdmp_base_url: "https://github.com/HicServices/RDMP/releases/download"
-hicservices_rdmp_install_root: "{{ smi_root }}/software/HicServices/RDMP"
 hicservices_rdmp_versions:
   "8.1.0":
     packages:

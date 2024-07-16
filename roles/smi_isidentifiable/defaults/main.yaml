@@ -1,6 +1,8 @@
 ---
+smi_isidentifiable_smi_root_dir: "{{ smi_root_dir | default(lookup('env', 'HOME') ~ '/smi') }}"
+smi_isidentifiable_base_dir: "{{ smi_isidentifiable_smi_root_dir }}/software/SMI/SmiServices"
+
 smi_isidentifiable_base_url: "https://github.com/SMI/IsIdentifiable/releases/download"
-smi_isidentifiable_install_root: "{{ smi_root }}/software/SMI/IsIdentifiable"
 smi_isidentifiable_versions:
   "0.3.0":
     packages:

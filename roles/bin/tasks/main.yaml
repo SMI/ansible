@@ -2,7 +2,7 @@
 - name: Ensure bin dir exists
   become: true
   ansible.builtin.file:
-    name: "{{ smi_root }}/bin"
+    name: "{{ bin_bin_dir }}"
     state: directory
     mode: u=rwx,g=rx,o=rx
 
@@ -10,6 +10,6 @@
   become: true
   ansible.builtin.template:
     src: "{{ item }}"
-    dest: "{{ smi_root }}/bin/"
+    dest: "{{ bin_bin_dir }}/"
     mode: u=rwx,g=rx,o=rx
   with_ansible.builtin.fileglob: templates/bin/*

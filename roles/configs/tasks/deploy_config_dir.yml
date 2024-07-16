@@ -2,7 +2,7 @@
 - name: Ensure config dir exists
   become: true
   ansible.builtin.file:
-    path: "{{ smi_root }}/configs/{{ config_name }}"
+    path: "{{ configs_configs_dir }}/{{ config_name }}"
     state: directory
     mode: u=rwx,g=rx,o=rx
 
@@ -10,6 +10,6 @@
   become: true
   ansible.builtin.template:
     src: "{{ item }}"
-    dest: "{{ smi_root }}/configs/{{ config_name }}/{{ item | basename }}"
+    dest: "{{ configs_configs_dir }}/{{ config_name }}/{{ item | basename }}"
     mode: u=rw,g=r,o=r
   with_ansible.builtin.fileglob: "{{ configs_template_dir }}/{{ config_name }}/*"

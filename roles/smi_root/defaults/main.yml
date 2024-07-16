@@ -1,1 +1,3 @@
 ---
+
+smi_root_smi_root_dir: "{{ smi_root_dir | default(lookup('env', 'HOME') ~ '/smi') }}"
