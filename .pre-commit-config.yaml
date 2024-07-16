@@ -82,7 +82,7 @@ repos:
     rev: "v1.5.0"
     hooks:
       - id: yesqa
-        additional_dependencies: [pep8-naming]
+        additional_dependencies: [pep8-naming==0.14.1]
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: "v1.10.1"
     hooks:
@@ -97,7 +97,9 @@ repos:
     hooks:
       - id: flake8
         additional_dependencies:
-          [flake8-bugbear, flake8-assert-msg, pep8-naming]
+        - flake8-bugbear==24.4.26
+        - flake8-assert-msg==1.1.1
+        - pep8-naming==0.14.1
         args: [--config, .meta/flake8.conf]
   # Yaml
   - repo: https://github.com/adrienverge/yamllint
@@ -113,8 +115,8 @@ repos:
         args:
           [--config, .meta/ansible-lint.yml]
         additional_dependencies:
-          - ansible
-          - jmespath
+          - ansible==10.1.0
+          - jmespath==1.0.1
   # Shell
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: "v0.10.0.1"
