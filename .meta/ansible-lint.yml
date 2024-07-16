@@ -1,5 +1,7 @@
 ---
 quiet: true
+strict: true
+profile: "production"
 skip_list:
   # "All names should start with an uppercase letter for languages that support it"
   - name[casing]
@@ -7,5 +9,3 @@ skip_list:
   - galaxy[version-incorrect]
   # We use yamllint separately
   - yaml
-exclude_paths:
-  - .pre-commit-config.yaml
