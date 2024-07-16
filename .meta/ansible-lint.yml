@@ -1,7 +1,11 @@
 ---
 quiet: true
-
 skip_list:
-  - role-name
+  # "All names should start with an uppercase letter for languages that support it"
   - name[casing]
+  # "collection version should be greater than or equal to 1.0.0"
   - galaxy[version-incorrect]
+  # We use yamllint separately
+  - yaml
+exclude_paths:
+  - .pre-commit-config.yaml
