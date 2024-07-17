@@ -1,8 +1,8 @@
 ---
-- name: Ensure hicservices_rdmp_install_root exists
+- name: Ensure hicservices_rdmp_base_dir exists
   become: true
   ansible.builtin.file:
-    path: "{{ hicservices_rdmp_install_root }}"
+    path: "{{ hicservices_rdmp_base_dir }}"
     state: directory
     mode: u=rwx,g=rx,o=rx
 
@@ -13,7 +13,7 @@
     cmd: |
       deploy_rdmp_cli.py \
         {{ hicservices_rdmp_base_url }} \
-        {{ hicservices_rdmp_install_root }} \
+        {{ hicservices_rdmp_base_dir }} \
         '{{ hicservices_rdmp_versions | to_json }}'
   register: deploy_result
   changed_when: deploy_result.rc != 0
