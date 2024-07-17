@@ -4,7 +4,7 @@
   ansible.builtin.file:
     name: "{{ smi_root_smi_root_dir }}"
     state: directory
-    owner: "{{ ansible_become_user }}"
+    owner: "{{ ansible_become_user | default('root') }}"
     group: "{{ smi_root_smi_group }}"
     mode: u=rwx,g=rx,o=
 
