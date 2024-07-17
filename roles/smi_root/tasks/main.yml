@@ -1,5 +1,5 @@
 ---
-- name: Ensure smi_root exists
+- name: Ensure smi_root_smi_root_dir exists
   become: true
   ansible.builtin.file:
     name: "{{ smi_root_smi_root_dir }}"
