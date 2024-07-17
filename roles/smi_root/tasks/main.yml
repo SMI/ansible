@@ -4,8 +4,8 @@
   ansible.builtin.file:
     name: "{{ smi_root_smi_root_dir }}"
     state: directory
-    owner: root
-    group: smi
+    owner: "{{ ansible_become_user }}"
+    group: "{{ smi_root_smi_group }}"
     mode: u=rwx,g=rx,o=
 
 - name: Template README.md

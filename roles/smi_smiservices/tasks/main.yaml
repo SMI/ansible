@@ -1,8 +1,8 @@
 ---
-- name: Ensure smi_smiservices_install_root exists
+- name: Ensure smi_smiservices_base_dir exists
   become: true
   ansible.builtin.file:
-    name: "{{ smi_smiservices_install_root }}"
+    name: "{{ smi_smiservices_base_dir }}"
     state: directory
     mode: u=rwx,g=rx,o=rx
 
@@ -13,7 +13,7 @@
     cmd: |
       deploy_smiservices.py \
         {{ smi_smiservices_base_url }} \
-        {{ smi_smiservices_install_root }} \
+        {{ smi_smiservices_base_dir }} \
         '{{ smi_smiservices_versions | to_json }}'
   register: deploy_result
   changed_when: deploy_result.rc != 0

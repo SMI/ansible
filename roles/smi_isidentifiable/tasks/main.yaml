@@ -1,8 +1,8 @@
 ---
-- name: Ensure smi_isidentifiable_install_root exists
+- name: Ensure smi_isidentifiable_base_dir exists
   become: true
   ansible.builtin.file:
-    path: "{{ smi_isidentifiable_install_root }}"
+    path: "{{ smi_isidentifiable_base_dir }}"
     state: directory
     mode: u=rwx,g=rx,o=rx
 
@@ -13,7 +13,7 @@
     cmd: |
       deploy_isidentifiable.py \
         {{ smi_isidentifiable_base_url }} \
-        {{ smi_isidentifiable_install_root }} \
+        {{ smi_isidentifiable_base_dir }} \
         '{{ smi_isidentifiable_versions | to_json }}'
   register: deploy_result
   changed_when: deploy_result.rc != 0
