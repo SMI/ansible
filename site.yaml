@@ -13,5 +13,7 @@
       tags: [smiservices]
     - role: smi_isidentifiable
       tags: [isidentifiable]
+    - role: smi_structuredreports
+      tags: [structuredreports]
     - role: hicservices_rdmp
       tags: [rdmp_cli]

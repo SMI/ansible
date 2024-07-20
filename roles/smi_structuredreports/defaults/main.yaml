@@ -1,0 +1,8 @@
+---
+smi_structuredreports_smi_root_dir: "{{ smi_root_dir | default(lookup('env', 'HOME') ~ '/smi') }}"
+smi_structuredreports_base_dir: "{{ smi_structuredreports_smi_root_dir }}/software/SMI/StructuredReports"
+
+smi_structuredreports_base_url: "https://github.com/SMI/StructuredReports/tarball"
+smi_structuredreports_tarballs:
+  - commit_sha: "cbc72c6"
+    checksum: "md5:dd0f585546313ec2938d042506d4e1d4"

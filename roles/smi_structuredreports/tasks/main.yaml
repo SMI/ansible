@@ -1,0 +1,33 @@
+---
+- name: Ensure smi_structuredreports_base_dir exists
+  become: true
+  ansible.builtin.file:
+    name: "{{ smi_structuredreports_base_dir }}"
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+
+- name: Download archives
+  become: true
+  environment: "{{ proxy_env | default({}) }}"
+  ansible.builtin.get_url:
+    url: "{{ smi_structuredreports_base_url }}/{{ item.commit_sha }}"
+    dest: "{{ smi_structuredreports_base_dir }}/{{ item.commit_sha }}.tgz"
+    mode: "u=rw,g=r,o=r"
+    checksum: "{{ item.checksum }}"
+  with_items: "{{ smi_structuredreports_tarballs }}"
+
+- name: Unpack archives
+  become: true
+  environment: "{{ proxy_env | default({}) }}"
+  ansible.builtin.unarchive:
+    src: "{{ smi_structuredreports_base_dir }}/{{ item.commit_sha }}.tgz"
+    dest: "{{ smi_structuredreports_base_dir }}"
+    mode: "u=rwX,g=rX,o=rX"
+    creates: "{{ smi_structuredreports_base_dir }}/SMI-StructuredReports-{{ item.commit_sha }}"
+    remote_src: yes
+    exclude:
+    - src/data
+    - src/test
+    - "*.dcm"
+    - "*.png"
+  with_items: "{{ smi_structuredreports_tarballs }}"
