@@ -15,5 +15,7 @@
       tags: [isidentifiable]
     - role: smi_structuredreports
       tags: [structuredreports]
+    - role: smi_dicompixelanon
+      tags: [dicompixelanon]
     - role: hicservices_rdmp
       tags: [rdmp_cli]

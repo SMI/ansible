@@ -1,0 +1,8 @@
+---
+smi_dicompixelanon_smi_root_dir: "{{ smi_root_dir | default(lookup('env', 'HOME') ~ '/smi') }}"
+smi_dicompixelanon_base_dir: "{{ smi_dicompixelanon_smi_root_dir }}/software/SMI/dicompixelanon"
+
+smi_dicompixelanon_base_url: "https://github.com/SMI/dicompixelanon/tarball"
+smi_dicompixelanon_tarballs:
+  - commit_sha: "a78e24a"
+    checksum: "md5:fd267274031c87051642eb37c2912a65"
