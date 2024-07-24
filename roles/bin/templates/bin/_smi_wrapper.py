@@ -105,6 +105,6 @@ def run_smiservices(config_name: str, single_instance: bool = False) -> None:
         f"{INSTALL_DIR}/software/SMI/SmiServices/"
         f"{env['SMI_SMI_SMISERVICES_VERSION']}/smi/smi"
     )
-    app_name = sys.argv[0].split("smi-")[1].split(".py")[0]
+    app_name = sys.argv[0].rpartition("smi-")[-1]
     cmd = (smi_bin, app_name, "-y", config_path)
     run(wrapper_args, remaining_argv, cmd, env)
