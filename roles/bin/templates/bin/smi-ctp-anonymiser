@@ -8,7 +8,7 @@ args, remaining_argv, env, config_dir = wrapper.init()
 config_path = os.path.join(config_dir, wrapper.FILE_EXTRACT_CONFIG)
 allowlist_path = os.path.join(config_dir, "ctp.config.xml")
 ctp_jar = (
-    f"{wrapper.INSTALL_DIR}/software/SmiServices/{env['SMI_SMI_SMISERVICES_VERSION']}/"
+    f"{wrapper.INSTALL_DIR}/software/SMI/SmiServices/{env['SMI_SMI_SMISERVICES_VERSION']}/"
     "CTPAnonymiser.jar"
 )
 cmd = ("java", "-jar", ctp_jar, "-y", config_path, "-a", allowlist_path)
