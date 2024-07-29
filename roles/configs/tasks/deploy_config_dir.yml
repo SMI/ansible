@@ -6,6 +6,12 @@
     state: directory
     mode: u=rwx,g=rx,o=rx
 
+- name: Load extra vars file
+  ansible.builtin.include_vars:
+    dir: "{{ configs_configs_dir }}/{{ config_name }}"
+    files_matching: _vars.yaml
+    name: "{{ config_name }}_vars"
+
 - name: Template config files
   become: true
   ansible.builtin.template:

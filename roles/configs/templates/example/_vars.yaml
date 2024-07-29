@@ -1,0 +1,4 @@
+---
+# {{ ansible_managed }}
+
+some_version: "1.2.3"
