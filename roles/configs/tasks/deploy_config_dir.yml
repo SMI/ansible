@@ -8,7 +8,7 @@
 
 - name: Load extra vars file
   ansible.builtin.include_vars:
-    dir: "{{ configs_configs_dir }}/{{ config_name }}"
+    dir: "{{ configs_template_dir }}/{{ config_name }}"
     files_matching: _vars.yaml
     name: "{{ config_name }}_vars"
 
