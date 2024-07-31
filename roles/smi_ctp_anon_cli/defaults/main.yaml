@@ -1,0 +1,6 @@
+---
+smi_ctp_anon_cli_smi_root_dir: "{{ smi_root_dir | default(lookup('env', 'HOME') ~ '/smi') }}"
+smi_ctp_anon_cli_base_dir: "{{ smi_ctp_anon_cli_smi_root_dir }}/software/SMI/ctp-anon-minimal"
+smi_ctp_anon_cli_base_url: "https://github.com/SMI/ctp-anon-cli/releases/download"
+smi_ctp_anon_cli_version: "0.5.0"
+smi_ctp_anon_cli_checksum: "md5:2881f107a180da85268f4961c1fcc6d3"

@@ -21,3 +21,5 @@
       tags: [rdmp_cli]
     - role: smi_cogstack_semehr
       tags: [cogstack_semehr]
+    - role: smi_ctp_anon_cli
+      tags: [ctp_anon_cli]

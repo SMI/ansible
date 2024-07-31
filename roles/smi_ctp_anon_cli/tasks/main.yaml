@@ -1,0 +1,23 @@
+---
+- name: Ensure smi_ctp_anon_cli_base_dir exists
+  become: true
+  ansible.builtin.file:
+    name: "{{ smi_ctp_anon_cli_base_dir }}"
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+
+- name: Ensure version dir exists
+  become: true
+  ansible.builtin.file:
+    name: "{{ smi_ctp_anon_cli_base_dir }}/v{{ smi_ctp_anon_cli_version }}"
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+
+- name: Download jar
+  become: true
+  environment: "{{ proxy_env | default({}) }}"
+  ansible.builtin.get_url:
+    url: "{{ smi_ctp_anon_cli_base_url }}/v{{ smi_ctp_anon_cli_version }}/ctp-anon-cli-{{ smi_ctp_anon_cli_version }}.jar"
+    dest: "{{ smi_ctp_anon_cli_base_dir }}/v{{ smi_ctp_anon_cli_version }}/ctp-anon-cli-{{ smi_ctp_anon_cli_version }}.jar"
+    mode: "u=rw,g=r,o=r"
+    checksum: "{{ smi_ctp_anon_cli_checksum }}"
