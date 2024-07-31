@@ -19,3 +19,5 @@
       tags: [dicompixelanon]
     - role: hicservices_rdmp
       tags: [rdmp_cli]
+    - role: smi_cogstack_semehr
+      tags: [cogstack_semehr]

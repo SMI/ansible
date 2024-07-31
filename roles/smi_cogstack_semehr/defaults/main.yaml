@@ -1,0 +1,8 @@
+---
+smi_cogstack_semehr_smi_root_dir: "{{ smi_root_dir | default(lookup('env', 'HOME') ~ '/smi') }}"
+smi_cogstack_semehr_base_dir: "{{ smi_cogstack_semehr_smi_root_dir }}/software/SMI/CogStack-SemEHR"
+
+smi_cogstack_semehr_base_url: "https://github.com/SMI/CogStack-SemEHR/tarball"
+smi_cogstack_semehr_tarballs:
+  - commit_sha: "96d1486"
+    checksum: "md5:74d2f1b0621bfbf6c6eae532e5bd096c"
