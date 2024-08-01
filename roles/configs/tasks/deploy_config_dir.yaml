@@ -1,0 +1,31 @@
+---
+- name: Stat config template dir
+  ansible.builtin.stat:
+    path: "{{ configs_template_dir }}/{{ env_name }}"
+  register: stat_result
+
+- name: Assert config template dir exists
+  ansible.builtin.assert:
+    that: stat_result.stat.exists and stat_result.stat.isdir
+    msg: "Expected {{ configs_template_dir }}/{{ env_name }} to be a directory"
+
+- name: Ensure config dir exists
+  become: true
+  ansible.builtin.file:
+    path: "{{ configs_configs_dir }}/{{ env_name }}"
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+
+- name: Load extra vars file
+  ansible.builtin.include_vars:
+    dir: "{{ configs_template_dir }}/{{ env_name }}"
+    files_matching: _vars.yaml
+    name: "{{ env_name }}_vars"
+
+- name: Template config files
+  become: true
+  ansible.builtin.template:
+    src: "{{ item }}"
+    dest: "{{ configs_configs_dir }}/{{ env_name }}/{{ item | basename }}"
+    mode: u=rw,g=r,o=r
+  with_ansible.builtin.fileglob: "{{ configs_template_dir }}/{{ env_name }}/[!_]*"

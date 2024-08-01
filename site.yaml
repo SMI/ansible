@@ -2,6 +2,9 @@
 - name: Run all roles
   hosts: "{{ target | default('software_host') }}"
   gather_facts: true
+  vars:
+    smi_envs:
+      - example
   roles:
     - role: smi_root
       tags: [always]

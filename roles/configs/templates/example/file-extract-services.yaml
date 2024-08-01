@@ -4,7 +4,7 @@
 RabbitOptions:
   RabbitMqHostName: "localhost"
   RabbitMqHostPort: 5672
-  RabbitMqVirtualHost: "smi_{{ config_name }}_file_extract"
+  RabbitMqVirtualHost: "smi_{{ env_name }}_file_extract"
   RabbitMqUserName: "guest"
   RabbitMqPassword: "guest"
   RabbitMqControlExchangeName: "ControlExchange"
@@ -12,7 +12,7 @@ RabbitOptions:
 
 LoggingOptions:
   LogConfigFile: "{{ template_destpath | dirname }}/NLog.config.xml"
-  LogsRoot: "/tmp/smi/logs/{{ config_name }}"
+  LogsRoot: "/tmp/smi/logs/{{ env_name }}"
   TraceLogging: true
 
 FileSystemOptions:
