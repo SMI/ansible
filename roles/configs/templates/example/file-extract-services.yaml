@@ -41,4 +41,15 @@ ExtractImagesOptions:
   ExtractionRequestInfoProducerOptions:
     ExchangeName: "RequestInfoExchange"
     MaxConfirmAttempts: 1
-# ...
+
+CTPAnonymiserOptions:
+    VerifyRoutingKey: verify
+    NoVerifyRoutingKey: noverify
+    SRAnonTool: "{{ example_vars.sr_anon_tool }}"
+    AnonFileConsumerOptions:
+        QueueName: 'ExtractFileAnonQueue'
+        QoSPrefetchCount: 1
+        AutoAck: false
+    ExtractFileStatusProducerOptions:
+        ExchangeName: 'ExtractedFileStatusExchange'
+        MaxConfirmAttempts: 5
