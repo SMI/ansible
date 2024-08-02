@@ -1,5 +1,5 @@
 ---
-configs_smi_envs: "{{ smi_envs | default(['example']) }}"
+configs_smi_envs: "{{ smi_envs | default([]) }}"
 configs_smi_root_dir: "{{ smi_root_dir | default(lookup('env', 'HOME') ~ '/smi') }}"
 configs_configs_dir: "{{ configs_smi_root_dir }}/configs"
 
