@@ -1,6 +1,0 @@
----
-# {{ ansible_managed }}
-
-some_version: "1.2.3"
-
-sr_anon_tool: "{{ configs_smi_root_dir }}/software/SMI/StructuredReports/SMI-StructuredReports-8bb3903/src/applications/SRAnonTool/CTP_SRAnonTool.sh"
