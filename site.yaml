@@ -25,3 +25,5 @@
       tags: [cogstack_semehr]
     - role: smi_ctp_anon_cli
       tags: [ctp_anon_cli]
+    - role: semehr_venv
+      tags: [semehr_venv]

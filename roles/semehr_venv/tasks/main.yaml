@@ -1,0 +1,17 @@
+---
+- name: Ensure venvs dir exists
+  ansible.builtin.file:
+    path: "{{ semehr_venv_venvs_dir }}"
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+
+- name: Check semehr_smi_envs length
+  ansible.builtin.assert:
+    that: "{{ semehr_venv_smi_envs | length > 0 }}"
+    msg: At least one smi_env must be defined for this role
+
+- name: Create semehr venvs
+  with_items: "{{ semehr_venv_smi_envs }}"
+  ansible.builtin.pip:
+    requirements: "{{ semehr_venv_smi_root_dir }}/software/SMI/StructuredReports/SMI-StructuredReports-{{ item['structuredreports_version'] }}/src/applications/SRAnonTool/requirements.txt"
+    virtualenv: "{{ semehr_venv_venvs_dir }}/{{ item['name'] }}/semehr"

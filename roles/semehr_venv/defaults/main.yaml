@@ -1,0 +1,4 @@
+---
+semehr_venv_smi_envs: "{{ smi_envs | default([]) }}"
+semehr_venv_smi_root_dir: "{{ smi_root_dir | default(lookup('env', 'HOME') ~ '/smi') }}"
+semehr_venv_venvs_dir: "{{ semehr_venv_smi_root_dir }}/venvs"
