@@ -1,0 +1,25 @@
+---
+# todo load vars & vault
+# todo skip above from target
+
+- name: Ensure env dir exists
+  ansible.builtin.file:
+    path: "{{ envs_envs_dir }}/{{ env_name }}"
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+
+- name: Ensure env directory structure exists
+  ansible.builtin.file:
+    path: "{{ envs_envs_dir }}/{{ env_name }}//{{ item.path }}"
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+  with_community.general.filetree: "{{ envs_template_dir }}/{{ env_name }}"
+  when: item.state == 'directory'
+
+- name: Ensure files are populated from templates
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ envs_envs_dir }}/{{ env_name }}/{{ item.path }}"
+    mode: u=rw,g=r,o=r
+  with_community.general.filetree: "{{ envs_template_dir }}/{{ env_name }}"
+  when: item.state == 'file'

@@ -9,8 +9,8 @@
       tags: [always]
     - role: bin
       tags: [bin]
-    - role: configs
-      tags: [configs]
+    - role: envs
+      tags: [envs]
     - role: smi_smiservices
       tags: [smiservices]
     - role: smi_isidentifiable

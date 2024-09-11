@@ -1,0 +1,15 @@
+---
+- name: Ensure envs dir exists
+  become: true
+  ansible.builtin.file:
+    name: "{{ envs_envs_dir }}"
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+
+# TODO register dirs
+
+- name: Deploy envs
+  ansible.builtin.include_tasks: deploy_env_dir.yaml
+  with_items: "{{ env_names }}"
+  loop_control:
+    loop_var: env_name

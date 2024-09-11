@@ -47,7 +47,7 @@ def init() -> tuple[argparse.Namespace, list[str], dict[str, str], str]:
 
     assert "SMI_ENV" in os.environ, "SMI_ENV must be set"
     smi_env = os.environ["SMI_ENV"]
-    env_dir = f"{INSTALL_DIR}/configs/{smi_env}"
+    env_dir = f"{INSTALL_DIR}/envs/{smi_env}"
     assert os.path.isdir(env_dir), f"{env_dir} does not exist"
     env = {**os.environ, **_env_from(f"{env_dir}/env.bash")}
 
@@ -55,7 +55,7 @@ def init() -> tuple[argparse.Namespace, list[str], dict[str, str], str]:
         for var in sorted(x for x in env if x.startswith("SMI_")):
             print(f"{var}={env[var]}")
 
-    config_dir = f"{INSTALL_DIR}/configs/{smi_env}"
+    config_dir = f"{INSTALL_DIR}/envs/{smi_env}"
 
     return (wrapper_args, remaining_argv, env, config_dir)
 
