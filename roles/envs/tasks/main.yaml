@@ -6,10 +6,15 @@
     state: directory
     mode: u=rwx,g=rx,o=rx
 
-# TODO register dirs
+- name: Register env names
+  ansible.builtin.find:
+    paths: "{{ envs_template_dir }}"
+    file_type: directory
+    depth: 1
+  register: env_names
 
 - name: Deploy envs
   ansible.builtin.include_tasks: deploy_env_dir.yaml
-  with_items: "{{ env_names }}"
+  with_items: "{{ env_names.files | map(attribute='path') | map('basename') }}"
   loop_control:
     loop_var: env_name
