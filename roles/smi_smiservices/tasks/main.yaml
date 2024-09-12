@@ -1,13 +1,11 @@
 ---
 - name: Ensure smi_smiservices_base_dir exists
-  become: true
   ansible.builtin.file:
     name: "{{ smi_smiservices_base_dir }}"
     state: directory
     mode: u=rwx,g=rx,o=rx
 
 - name: Deploy SmiServices versions
-  become: true
   environment: "{{ proxy_env | default({}) }}"
   ansible.builtin.script:
     cmd: |

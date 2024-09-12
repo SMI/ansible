@@ -1,6 +1,5 @@
 ---
 - name: Ensure envs dir exists
-  become: true
   ansible.builtin.file:
     name: "{{ envs_envs_dir }}"
     state: directory
