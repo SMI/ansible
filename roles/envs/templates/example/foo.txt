@@ -1,0 +1,4 @@
+{{ ansible_managed }}
+
+{{ env_vars.foo }}
+{{ env_vars.some_secret }}

@@ -1,4 +1,0 @@
-foo: yay
-bar: baz
-
-foo_secret: "{{ vault_foo_secret }}"

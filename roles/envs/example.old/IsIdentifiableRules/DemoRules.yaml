@@ -1,7 +1,0 @@
----
-# {{ ansible_managed }}
-
-BasicRules:
-  - Action: Ignore
-    IfColumn: Manufacturer
-    IfPattern: ^AGFA$

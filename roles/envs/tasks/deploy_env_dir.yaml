@@ -1,7 +1,4 @@
 ---
-# todo load vars & vault
-# todo skip above from target
-
 - name: Ensure env dir exists
   ansible.builtin.file:
     path: "{{ envs_envs_dir }}/{{ env_name }}"
@@ -19,11 +16,12 @@
 - name: Load env vault.yaml
   ansible.builtin.include_vars:
     file: "{{ envs_template_dir }}/{{ env_name }}/vault.yaml"
-    # name: env_vault_vars
-  register: x
+    name: env_vault_vars
 
-# - debug: var=env_vault_vars
-# - pause:
+- name: Assert env_vault_vars defined
+  ansible.builtin.assert:
+    that: env_vault_vars is defined
+    fail_msg: "Expected to load vars from file. A variable was possibly undefined (see https://github.com/ansible/ansible/issues/25787)"
 
 - name: Load env vars.yaml
   ansible.builtin.include_vars:
@@ -33,7 +31,7 @@
 - name: Assert env_vars defined
   ansible.builtin.assert:
     that: env_vars is defined
-    fail_msg: "Expected to load env_vars from file. A variable was possibly undefined (see https://github.com/ansible/ansible/issues/25787)"
+    fail_msg: "Expected to load vars from file. A variable was possibly undefined (see https://github.com/ansible/ansible/issues/25787)"
 
 - name: Ensure files are populated from templates
   ansible.builtin.template:
@@ -41,4 +39,4 @@
     dest: "{{ envs_envs_dir }}/{{ env_name }}/{{ item.path }}"
     mode: u=rw,g=r,o=r
   with_community.general.filetree: "{{ envs_template_dir }}/{{ env_name }}"
-  when: item.state == 'file'
+  when: item.state == 'file' and item.path not in ['vars.yaml', 'vault.yaml']

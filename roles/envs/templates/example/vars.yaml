@@ -1,0 +1,4 @@
+# {{ ansible_managed }}
+---
+foo: bar
+some_secret: "{{ env_vault_vars.vault_some_secret }}"
