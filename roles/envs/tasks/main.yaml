@@ -12,6 +12,7 @@
     file_type: directory
     depth: 1
   register: env_names
+  failed_when: env_names.matched == 0
 
 - name: Deploy envs
   ansible.builtin.include_tasks: deploy_env_dir.yaml
