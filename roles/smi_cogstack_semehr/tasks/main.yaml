@@ -1,13 +1,11 @@
 ---
 - name: Ensure smi_cogstack_semehr_base_dir exists
-  become: true
   ansible.builtin.file:
     name: "{{ smi_cogstack_semehr_base_dir }}"
     state: directory
     mode: u=rwx,g=rx,o=rx
 
 - name: Download archives
-  become: true
   environment: "{{ proxy_env | default({}) }}"
   ansible.builtin.get_url:
     url: "{{ smi_cogstack_semehr_base_url }}/{{ item.commit_sha }}"
@@ -17,7 +15,6 @@
   with_items: "{{ smi_cogstack_semehr_tarballs }}"
 
 - name: Unpack archives
-  become: true
   ansible.builtin.unarchive:
     src: "{{ smi_cogstack_semehr_base_dir }}/{{ item.commit_sha }}.tgz"
     dest: "{{ smi_cogstack_semehr_base_dir }}"

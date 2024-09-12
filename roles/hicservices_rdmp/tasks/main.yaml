@@ -1,13 +1,11 @@
 ---
 - name: Ensure hicservices_rdmp_base_dir exists
-  become: true
   ansible.builtin.file:
     path: "{{ hicservices_rdmp_base_dir }}"
     state: directory
     mode: u=rwx,g=rx,o=rx
 
 - name: Deploy rdmp-cli versions
-  become: true
   environment: "{{ proxy_env | default({}) }}"
   ansible.builtin.script:
     cmd: |

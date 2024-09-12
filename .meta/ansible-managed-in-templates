@@ -7,6 +7,8 @@ def main() -> int:
     rc = 0
 
     for arg in sys.argv[1:]:
+        if arg.endswith("vault.yaml"):
+            continue
         with open(arg) as f:
             if needle in f.read():
                 continue

@@ -1,13 +1,11 @@
 ---
 - name: Ensure bin dir exists
-  become: true
   ansible.builtin.file:
     name: "{{ bin_bin_dir }}"
     state: directory
     mode: u=rwx,g=rx,o=rx
 
 - name: Template service scripts to bin
-  become: true
   ansible.builtin.template:
     src: "{{ item }}"
     dest: "{{ bin_bin_dir }}/"
