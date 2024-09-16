@@ -48,6 +48,11 @@ def init() -> tuple[argparse.Namespace, list[str]]:
     return (wrapper_args, remaining_argv)
 
 
+def print_smi_env() -> None:
+    for var in sorted(x for x in os.environ if x.startswith("SMI_")):
+        print(f"{var}={os.environ[var]}")
+
+
 def run(
     wrapper_args: argparse.Namespace,
     remaining_argv: list[str],
@@ -56,8 +61,7 @@ def run(
     cmd = (*cmd, *remaining_argv)
 
     if wrapper_args.verbose:
-        for var in sorted(x for x in os.environ if x.startswith("SMI_")):
-            print(f"{var}={os.environ[var]}")
+        print_smi_env()
         if wrapper_args.copies > 1:
             print(f"Executing {wrapper_args.copies} detached instances of:")
         subprocess.check_call(("echo", "$", *cmd))
