@@ -5,9 +5,6 @@ import subprocess
 import sys
 
 
-INSTALL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-
-
 def _env_from(file_path: str) -> dict[str, str]:
     env = {}
     with open(file_path) as f:
@@ -42,9 +39,13 @@ def init() -> tuple[argparse.Namespace, list[str], dict[str, str], str]:
     if wrapper_args.copies > 1:
         wrapper_args.detach = True
 
+    assert "SMI_ROOT" in os.environ, "SMI_ROOT must be set"
+    smi_root = os.environ["SMI_ROOT"]
+
     assert "SMI_ENV" in os.environ, "SMI_ENV must be set"
     smi_env = os.environ["SMI_ENV"]
-    env_dir = f"{INSTALL_DIR}/envs/{smi_env}"
+
+    env_dir = f"{smi_root}/envs/{smi_env}"
     assert os.path.isdir(env_dir), f"{env_dir} does not exist"
     env = {**os.environ, **_env_from(f"{env_dir}/env.bash")}
 
@@ -52,9 +53,7 @@ def init() -> tuple[argparse.Namespace, list[str], dict[str, str], str]:
         for var in sorted(x for x in env if x.startswith("SMI_")):
             print(f"{var}={env[var]}")
 
-    config_dir = f"{INSTALL_DIR}/envs/{smi_env}"
-
-    return (wrapper_args, remaining_argv, env, config_dir)
+    return (wrapper_args, remaining_argv, env, env_dir)
 
 
 def run(
