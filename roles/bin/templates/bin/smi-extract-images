@@ -5,6 +5,6 @@ import os
 import _smi_wrapper as wrapper
 
 wrapper.run_smiservices(
-    os.environ["SMI_SMI_SERVICES_EXTRACT_PIPELINE_CONFIG"],
+    os.environ["SMI_SMISERVICES_EXTRACT_PIPELINE_CONFIG"],
     single_instance=True,
 )
