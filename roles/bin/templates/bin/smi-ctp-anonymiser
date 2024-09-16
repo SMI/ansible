@@ -5,8 +5,11 @@ import os
 import _smi_wrapper as wrapper
 
 args, remaining_argv, env, config_dir = wrapper.init()
-config_path = os.path.join(config_dir, wrapper.FILE_EXTRACT_CONFIG)
+config_path = os.environ["SMI_SMI_SERVICES_EXTRACT_PIPELINE_CONFIG"]
 allowlist_path = os.path.join(config_dir, "ctp.config.xml")
+assert os.path.isfile(allowlist_path), f"Expected {allowlist_path} to be a file"
+
+# TODO Inject SmiServices version dir not whole path
 ctp_jar = (
     f"{wrapper.INSTALL_DIR}/software/SMI/SmiServices/{env['SMI_SMI_SMISERVICES_VERSION']}/"
     "CTPAnonymiser.jar"
