@@ -4,11 +4,11 @@ import os
 
 import _smi_wrapper as wrapper
 
-args, remaining_argv, env, config_dir = wrapper.init()
+args, remaining_argv = wrapper.init()
 cmd = (
     "java",
-    *("-jar", os.path.join(env["SMI_SMISERVICES_INSTALL_DIR"], "CTPAnonymiser.jar")),
+    *("-jar", os.environ["SMI_SMISERVICES_CTP_JAR"]),
     *("-y", os.environ["SMI_SMISERVICES_EXTRACT_PIPELINE_CONFIG"]),
     *("-a", os.environ["SMI_SMISERVICES_CTP_ALLOWLIST"]),
 )
-wrapper.run(args, remaining_argv, cmd, env)
+wrapper.run(args, remaining_argv, cmd)
