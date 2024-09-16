@@ -97,7 +97,7 @@ def run_smiservices(config_path: str, single_instance: bool = False) -> None:
             "Cannot start more than one copy of this service, or run it detached",
         )
 
-    smi_bin = os.path.join(os.environ["SMI_SMISERVICES_INSTALL_DIR"], "smi", "smi")
+    smi_bin = os.environ["SMI_SMISERVICES_BIN"]
     app_name = sys.argv[0].rpartition("smi-")[-1]
     cmd = (smi_bin, app_name, "-y", config_path)
     run(wrapper_args, remaining_argv, cmd, env)
