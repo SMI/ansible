@@ -19,7 +19,7 @@ with open(f"{env_dir}/env.bash") as f:
         if not line.startswith("export"):
             continue
         var, val = line.split(" ", 1)[1].split("=")
-        os.environ[var] = val.strip('"')
+        os.environ[var] = os.path.expandvars(val.strip('"'))
 
 
 def init() -> tuple[argparse.Namespace, list[str]]:
