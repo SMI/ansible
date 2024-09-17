@@ -1,4 +1,5 @@
 #!/bin/bash
+# {{ ansible_managed }}
 # CTP_SRAnonTool.sh
 #   This script is called from CTP via the SRAnonTool config in the SmiServices config
 # It is called with -i DICOMfile -o OutputDICOMfile
