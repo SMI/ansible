@@ -18,10 +18,27 @@ virtenv=""
 debug=0
 verbose=0
 
+if [ "$ENV_DIR" == "" ]; then
+	echo "${prog}: ERROR: env var ENV_DIR must be set" >&2
+    exit 1
+fi
+
+PYTHON="${ENV_DIR}/venvs/semehr/bin/python"
+if [ ! -f "${PYTHON}" ]; then
+	echo "${prog}: ERROR: Expected to find python at ${PYTHON}" >&2
+    exit 1
+fi
+
+if [ "$SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR" == "" ]; then
+	echo "${prog}: ERROR: env var SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR must be set" >&2
+    exit 1
+fi
+
 if [ "$SMI_LOGS_ROOT" == "" ]; then
 	echo "${prog}: ERROR: env var SMI_LOGS_ROOT must be set" >&2
     exit 1
 fi
+
 
 # Configure logging
 log="$SMI_LOGS_ROOT/${prog}/${prog}.log"
@@ -108,7 +125,7 @@ anon_xml="${semehr_output_dir}/${doc_filename}.knowtator.xml"
 if [ $verbose -gt 0 ]; then
 	echo "RUN: CTP_DicomToText.py -i ${input_dcm} -o ${input_dcm}.SRtext"
 fi
-CTP_DicomToText.py \
+${PYTHON} ${SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR}/CTP_DicomToText.py \
 	-i "${input_dcm}" \
 	-o "${input_doc}"  || tidy_exit 4 "Error $? from CTP_DicomToText.py while converting ${input_dcm} to ${input_doc}"
 
@@ -117,7 +134,7 @@ CTP_DicomToText.py \
 #  Reads  $input_doc
 #  Writes $anon_doc, and $anon_xml via the --xml option
 #
-semehr_anon.py -s "${semehr_dir}" -i "${input_doc}" -o "${anon_doc}" --xml || tidy_exit 5 "Error running SemEHR-anon given ${input_doc} from ${input_dcm}"
+${PYTHON} ${SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR}/semehr_anon.py -s "${semehr_dir}" -i "${input_doc}" -o "${anon_doc}" --xml || tidy_exit 5 "Error running SemEHR-anon given ${input_doc} from ${input_dcm}"
 # If there's still no XML file then exit
 if [ ! -f "$anon_xml" ]; then
 	tidy_exit 6 "ERROR: SemEHR-anon failed to convert $input_doc to $anon_xml"
@@ -130,7 +147,7 @@ fi
 if [ $verbose -gt 0 ]; then
 	echo "RUN: CTP_XMLToDicom.py -i $input_dcm -x $anon_xml -o $output_dcm"
 fi
-CTP_XMLToDicom.py \
+${PYTHON} ${SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR}/CTP_XMLToDicom.py \
 	-i "$input_dcm" \
 	-x "$anon_xml" \
 	-o "$output_dcm"   || tidy_exit 7 "Error $? from CTP_XMLToDicom.py while redacting $output_dcm with $anon_xml"
