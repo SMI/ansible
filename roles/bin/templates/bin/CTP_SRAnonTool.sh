@@ -13,7 +13,7 @@ prog=$(basename "${0%.*}")
 progdir=$(dirname "$0")
 usage="usage: ${prog} [-d] [-v] [-e virtualenv] [-s semehr_root] -i read_from.dcm  -o write_into.dcm"
 options="dve:s:i:o:"
-semehr_dir="/opt/semehr"
+semehr_dir="/tmp/semehr"
 virtenv=""
 debug=0
 verbose=0
@@ -109,13 +109,13 @@ fi
 
 # ---------------------------------------------------------------------
 # Determine the SemEHR filenames - create per-process directories
-semehr_input_dir=$(mktemp  -d -t input_docs.XXXX --tmpdir=${semehr_dir}/data)
-semehr_output_dir=$(mktemp -d -t anonymised.XXXX --tmpdir=${semehr_dir}/data)
+semehr_input_dir=$(mktemp  -d -t input_docs.XXXX --tmpdir=${semehr_dir})
+semehr_output_dir=$(mktemp -d -t anonymised.XXXX --tmpdir=${semehr_dir})
 if [ "$semehr_input_dir" == "" ]; then
-	tidy_exit 8 "Cannot create temporary directory in ${semehr_dir}/data"
+	tidy_exit 8 "Cannot create temporary directory in ${semehr_dir}"
 fi
 if [ "$semehr_output_dir" == "" ]; then
-	tidy_exit 9 "Cannot create temporary directory in ${semehr_dir}/data"
+	tidy_exit 9 "Cannot create temporary directory in ${semehr_dir}"
 fi
 
 doc_filename=$(basename "$input_dcm")
