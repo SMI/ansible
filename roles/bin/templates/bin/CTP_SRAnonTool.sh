@@ -34,6 +34,11 @@ if [ "$SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR" == "" ]; then
     exit 1
 fi
 
+if [ "$SMI_STRUCTUREDREPORTS_SEMEHR_ANON_TASK" == "" ]; then
+	echo "${prog}: ERROR: env var SMI_STRUCTUREDREPORTS_SEMEHR_ANON_TASK must be set" >&2
+    exit 1
+fi
+
 if [ "$SMI_LOGS_ROOT" == "" ]; then
 	echo "${prog}: ERROR: env var SMI_LOGS_ROOT must be set" >&2
     exit 1
@@ -134,7 +139,7 @@ ${PYTHON} ${SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR}/CTP_DicomToText.py \
 #  Reads  $input_doc
 #  Writes $anon_doc, and $anon_xml via the --xml option
 #
-${PYTHON} ${SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR}/semehr_anon.py -s "${semehr_dir}" -i "${input_doc}" -o "${anon_doc}" --xml || tidy_exit 5 "Error running SemEHR-anon given ${input_doc} from ${input_dcm}"
+${PYTHON} ${SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR}/semehr_anon.py -c "${SMI_STRUCTUREDREPORTS_SEMEHR_ANON_TASK}" -i "${input_doc}" -o "${anon_doc}" --xml || tidy_exit 5 "Error running SemEHR-anon given ${input_doc} from ${input_dcm}"
 # If there's still no XML file then exit
 if [ ! -f "$anon_xml" ]; then
 	tidy_exit 6 "ERROR: SemEHR-anon failed to convert $input_doc to $anon_xml"
