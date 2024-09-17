@@ -12,7 +12,7 @@
 prog=$(basename "${0%.*}")
 progdir=$(dirname "$0")
 usage="usage: ${prog} [-d] [-v] [-e virtualenv] [-s semehr_root] -i read_from.dcm  -o write_into.dcm"
-options="dve:s:y:i:o:"
+options="dve:s:i:o:"
 semehr_dir="/opt/semehr"
 virtenv=""
 debug=0
