@@ -18,11 +18,6 @@ virtenv=""
 debug=0
 verbose=0
 
-if [ "$SMI_ROOT" == "" ]; then
-	echo "${prog}: ERROR: env var SMI_ROOT must be set" >&2
-    exit 1
-fi
-
 if [ "$SMI_LOGS_ROOT" == "" ]; then
 	echo "${prog}: ERROR: env var SMI_LOGS_ROOT must be set" >&2
     exit 1
@@ -56,12 +51,6 @@ tidy_exit()
 	if [ $rc -ne 0 ]; then echo "See log file $log" >&2; fi
 	exit $rc
 }
-
-# Default executable PATHs and Python libraries
-export PATH=${PATH}:${SMI_ROOT}/bin:${SMI_ROOT}/scripts:${progdir}
-if [ "$PYTHONPATH" == "" ]; then
-	export PYTHONPATH=${SMI_ROOT}/lib/python3:${SMI_ROOT}/lib/python3/virtualenvs/semehr/$(hostname -s)/lib/python3.6/site-packages:${SMI_ROOT}/lib/python3/virtualenvs/semehr/$(hostname -s)/lib64/python3.6/site-packages
-fi
 
 # Command line arguments
 while getopts ${options} var; do
