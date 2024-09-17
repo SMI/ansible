@@ -9,7 +9,7 @@
 # NOTE: semehr needs python2 but all other tools need python3.
 # XXX TODO: copy the input to the output if it doesn't exist?
 
-prog=$(basename "$0")
+prog=$(basename "${0%.*}")
 progdir=$(dirname "$0")
 usage="usage: ${prog} [-d] [-v] [-e virtualenv] [-s semehr_root] -i read_from.dcm  -o write_into.dcm"
 options="dve:s:y:i:o:"
