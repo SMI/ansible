@@ -46,3 +46,15 @@
     mode: u=rw,g=r,o=r
   with_community.general.filetree: "{{ env_template_dir }}"
   when: item.state == 'file' and item.path not in ['vars.yaml', 'vault.yaml']
+
+- name: Create venvs dir
+  ansible.builtin.file:
+    path: "{{ env_dir }}/venvs"
+    state: directory
+    mode: u=rwx,g=rx
+
+- name: Create semehr venv
+  ansible.builtin.pip:
+    requirements: "{{ env_vars.semehr_venv_requirements }}"
+    virtualenv: "{{ env_dir }}/venvs/semehr"
+  when: env_vars.semehr_venv_requirements is defined
