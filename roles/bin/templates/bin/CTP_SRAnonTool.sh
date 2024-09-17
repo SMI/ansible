@@ -18,14 +18,14 @@ virtenv=""
 debug=0
 verbose=0
 
-# Default value if not set is for SMI
 if [ "$SMI_ROOT" == "" ]; then
-	echo "${prog}: WARNING: env var SMI_ROOT was not set, using default value" >&2
-	export SMI_ROOT="/nfs/smi/home/smi"
+	echo "${prog}: ERROR: env var SMI_ROOT must be set" >&2
+    exit 1
 fi
+
 if [ "$SMI_LOGS_ROOT" == "" ]; then
-	echo "${prog}: WARNING: env var SMI_LOGS_ROOT was not set, using default value" >&2
-	export SMI_LOGS_ROOT="/beegfs-hdruk/smi/data/logs"
+	echo "${prog}: ERROR: env var SMI_LOGS_ROOT must be set" >&2
+    exit 1
 fi
 
 # Configure logging
