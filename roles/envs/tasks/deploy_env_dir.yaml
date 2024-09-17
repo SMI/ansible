@@ -54,6 +54,7 @@
     mode: u=rwx,g=rx
 
 - name: Create semehr venv
+  environment: "{{ proxy_env | default({}) }}"
   ansible.builtin.pip:
     requirements: "{{ env_vars.semehr_venv_requirements }}"
     virtualenv: "{{ env_dir }}/venvs/semehr"
