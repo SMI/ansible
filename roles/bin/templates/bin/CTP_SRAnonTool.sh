@@ -139,7 +139,7 @@ ${PYTHON} ${SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR}/SRAnonTool/CTP_DicomToText.p
 #  Reads  $input_doc
 #  Writes $anon_doc, and $anon_xml via the --xml option
 #
-${PYTHON} ${SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR}/SRAnonTool/semehr_anon.py -c "${SMI_STRUCTUREDREPORTS_SEMEHR_ANON_TASK}" -i "${input_doc}" -o "${anon_doc}" --xml || tidy_exit 5 "Error running SemEHR-anon given ${input_doc} from ${input_dcm}"
+${PYTHON} ${SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR}/semehr_anon.py -c "${SMI_STRUCTUREDREPORTS_SEMEHR_ANON_TASK}" -i "${input_doc}" -o "${anon_doc}" --xml || tidy_exit 5 "Error running SemEHR-anon given ${input_doc} from ${input_dcm}"
 # If there's still no XML file then exit
 if [ ! -f "$anon_xml" ]; then
 	tidy_exit 6 "ERROR: SemEHR-anon failed to convert $input_doc to $anon_xml"
