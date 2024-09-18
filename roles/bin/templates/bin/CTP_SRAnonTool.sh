@@ -130,7 +130,7 @@ anon_xml="${semehr_output_dir}/${doc_filename}.knowtator.xml"
 if [ $verbose -gt 0 ]; then
 	echo "RUN: CTP_DicomToText.py -i ${input_dcm} -o ${input_dcm}.SRtext"
 fi
-${PYTHON} ${SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR}/CTP_DicomToText.py \
+${PYTHON} ${SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR}/SRAnonTool/CTP_DicomToText.py \
 	-i "${input_dcm}" \
 	-o "${input_doc}"  || tidy_exit 4 "Error $? from CTP_DicomToText.py while converting ${input_dcm} to ${input_doc}"
 
@@ -139,7 +139,7 @@ ${PYTHON} ${SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR}/CTP_DicomToText.py \
 #  Reads  $input_doc
 #  Writes $anon_doc, and $anon_xml via the --xml option
 #
-${PYTHON} ${SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR}/semehr_anon.py -c "${SMI_STRUCTUREDREPORTS_SEMEHR_ANON_TASK}" -i "${input_doc}" -o "${anon_doc}" --xml || tidy_exit 5 "Error running SemEHR-anon given ${input_doc} from ${input_dcm}"
+${PYTHON} ${SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR}/SRAnonTool/semehr_anon.py -c "${SMI_STRUCTUREDREPORTS_SEMEHR_ANON_TASK}" -i "${input_doc}" -o "${anon_doc}" --xml || tidy_exit 5 "Error running SemEHR-anon given ${input_doc} from ${input_dcm}"
 # If there's still no XML file then exit
 if [ ! -f "$anon_xml" ]; then
 	tidy_exit 6 "ERROR: SemEHR-anon failed to convert $input_doc to $anon_xml"
@@ -152,7 +152,7 @@ fi
 if [ $verbose -gt 0 ]; then
 	echo "RUN: CTP_XMLToDicom.py -i $input_dcm -x $anon_xml -o $output_dcm"
 fi
-${PYTHON} ${SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR}/CTP_XMLToDicom.py \
+${PYTHON} ${SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR}/SRAnonTool/CTP_XMLToDicom.py \
 	-i "$input_dcm" \
 	-x "$anon_xml" \
 	-o "$output_dcm"   || tidy_exit 7 "Error $? from CTP_XMLToDicom.py while redacting $output_dcm with $anon_xml"
