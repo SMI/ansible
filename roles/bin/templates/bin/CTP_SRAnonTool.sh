@@ -18,12 +18,12 @@ virtenv=""
 debug=0
 verbose=0
 
-if [ "$ENV_DIR" == "" ]; then
-	echo "${prog}: ERROR: env var ENV_DIR must be set" >&2
+if [ "$SMI_ENV_DIR" == "" ]; then
+	echo "${prog}: ERROR: env var SMI_ENV_DIR must be set" >&2
     exit 1
 fi
 
-PYTHON="${ENV_DIR}/venvs/semehr/bin/python"
+PYTHON="${SMI_ENV_DIR}/venvs/semehr/bin/python"
 if [ ! -f "${PYTHON}" ]; then
 	echo "${prog}: ERROR: Expected to find python at ${PYTHON}" >&2
     exit 1
