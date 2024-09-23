@@ -1,0 +1,12 @@
+#!/usr/bin/env python3
+# {{ ansible_managed }}
+import os
+
+import _smi_wrapper as wrapper
+
+args, remaining_argv = wrapper.init()
+cmd = (
+    os.environ["SMI_RDMP_CLI"],
+    *("--dir", f"{os.environ['SMI_ENV_DIR']}/rdmp"),
+)
+wrapper.run(args, remaining_argv, cmd)
