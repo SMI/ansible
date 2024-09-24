@@ -7,7 +7,7 @@ ansible-playbook \
     --inventory "localhost," \
     -e "ansible_python_interpreter=$(command -v python || true)" \
     -e "ansible_become_user=${USER}" \
-    -e "smi_root_smi_group=${USER}" \
+    -e "smi_root_smi_group=${SMI_GROUP:-${USER}}" \
     -e "target=localhost" \
     "${@}" \
     site.yaml
