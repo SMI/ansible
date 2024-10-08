@@ -18,28 +18,28 @@ virtenv=""
 debug=0
 verbose=0
 
-if [ "$SMI_ENV_DIR" == "" ]; then
+if [[ "${SMI_ENV_DIR}" == "" ]]; then
 	echo "${prog}: ERROR: env var SMI_ENV_DIR must be set" >&2
     exit 1
 fi
 
 PYTHON="${SMI_ENV_DIR}/venvs/semehr/bin/python"
-if [ ! -f "${PYTHON}" ]; then
+if [[ ! -f "${PYTHON}" ]]; then
 	echo "${prog}: ERROR: Expected to find python at ${PYTHON}" >&2
     exit 1
 fi
 
-if [ "$SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR" == "" ]; then
+if [[ "${SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR}" == "" ]]; then
 	echo "${prog}: ERROR: env var SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR must be set" >&2
     exit 1
 fi
 
-if [ "$SMI_STRUCTUREDREPORTS_SEMEHR_ANON_TASK" == "" ]; then
+if [[ "${SMI_STRUCTUREDREPORTS_SEMEHR_ANON_TASK}" == "" ]]; then
 	echo "${prog}: ERROR: env var SMI_STRUCTUREDREPORTS_SEMEHR_ANON_TASK must be set" >&2
     exit 1
 fi
 
-if [ "$SMI_LOGS_ROOT" == "" ]; then
+if [[ "${SMI_LOGS_ROOT}" == "" ]]; then
 	echo "${prog}: ERROR: env var SMI_LOGS_ROOT must be set" >&2
     exit 1
 fi
@@ -47,31 +47,31 @@ fi
 
 # Configure logging
 log="$SMI_LOGS_ROOT/${prog}/${prog}.log"
-mkdir -p `dirname "${log}"`
-touch $log
-echo "`date` $@" >> $log
+mkdir -p "$(dirname "\"""${log}""\"")"
+touch "${log}"
+echo "$(date) $*" >> "${log}"
 
 # Error reporting and exit
 tidy_exit()
 {
 	rc=$1
 	msg="$2"
-	echo "$msg" >&2
-	echo "`date` $msg" >> $log
+	echo "${msg}" >&2
+	echo "$(date) ${msg}" >> "${log}"
 	# Tidy up, if not debugging
-	if [ $debug -eq 0 ]; then
-	  if [ -f "${input_doc}" ]; then rm -f "${input_doc}"; fi
-	  if [ -f "${anon_doc}" ]; then rm -f "${anon_doc}"; fi
-	  if [ -f "${anon_xml}" ]; then rm -f "${anon_xml}"; fi
+	if [[ "${debug}" -eq 0 ]]; then
+	  if [[ -f "${input_doc}" ]]; then rm -f "${input_doc}"; fi
+	  if [[ -f "${anon_doc}" ]]; then rm -f "${anon_doc}"; fi
+	  if [[ -f "${anon_xml}" ]]; then rm -f "${anon_xml}"; fi
 	  # Prefer not to use rm -fr for safety
-	  if [ -d "${semehr_input_dir}" ]; then rm -f "${semehr_input_dir}/"*; fi
-	  if [ -d "${semehr_input_dir}" ]; then rmdir "${semehr_input_dir}"; fi
-	  if [ -d "${semehr_output_dir}" ]; then rm -f "${semehr_output_dir}/"*; fi
-	  if [ -d "${semehr_output_dir}" ]; then rmdir "${semehr_output_dir}"; fi
+	  if [[ -d "${semehr_input_dir}" ]]; then rm -f "${semehr_input_dir}/"*; fi
+	  if [[ -d "${semehr_input_dir}" ]]; then rmdir "${semehr_input_dir}"; fi
+	  if [[ -d "${semehr_output_dir}" ]]; then rm -f "${semehr_output_dir}/"*; fi
+	  if [[ -d "${semehr_output_dir}" ]]; then rmdir "${semehr_output_dir}"; fi
 	fi
 	# Tell user where log file is when failure occurs
-	if [ $rc -ne 0 ]; then echo "See log file $log" >&2; fi
-	exit $rc
+	if [[ "${rc}" -ne 0 ]]; then echo "See log file $log" >&2; fi
+	exit "${rc}"
 }
 
 # Command line arguments
