@@ -17,7 +17,7 @@ virtenv=""
 debug=0
 verbose=0
 
-# shellcheck disable=SC2034
+# shellcheck disable=SC2154
 if [[ "${SMI_ENV_DIR}" == "" ]]; then
 	echo "${prog}: ERROR: env var SMI_ENV_DIR must be set" >&2
     exit 1
@@ -29,19 +29,19 @@ if [[ ! -f "${PYTHON}" ]]; then
     exit 1
 fi
 
-# shellcheck disable=SC2034
+# shellcheck disable=SC2154
 if [[ "${SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR}" == "" ]]; then
 	echo "${prog}: ERROR: env var SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR must be set" >&2
     exit 1
 fi
 
-# shellcheck disable=SC2034
+# shellcheck disable=SC2154
 if [[ "${SMI_STRUCTUREDREPORTS_SEMEHR_ANON_TASK}" == "" ]]; then
 	echo "${prog}: ERROR: env var SMI_STRUCTUREDREPORTS_SEMEHR_ANON_TASK must be set" >&2
     exit 1
 fi
 
-# shellcheck disable=SC2034
+# shellcheck disable=SC2154
 if [[ "${SMI_LOGS_ROOT}" == "" ]]; then
 	echo "${prog}: ERROR: env var SMI_LOGS_ROOT must be set" >&2
     exit 1
@@ -89,7 +89,7 @@ case "${var}" in
 	?) echo "${usage}" >&2; exit 1;;
 esac
 done
-shift $((${OPTIND} - 1))
+shift $((OPTIND - 1))
 
 if [[ ! -f "${input_dcm}" ]]; then
 	tidy_exit 2 "ERROR: cannot read input file '${input_dcm}'"
@@ -101,6 +101,8 @@ fi
 # Activate the virtual environment
 if [[ "${virtenv}" != "" ]]; then
 	if [[ -f "${virtenv}/bin/activate" ]]; then
+		# Can't shellcheck the Venv script, it isn't ours
+		# shellcheck disable=SC1091
 		source "${virtenv}/bin/activate"
 	else
 		echo "ERROR: Cannot activate virtual environment ${virtenv} - no bin/activate script" >&2
@@ -150,7 +152,7 @@ fi
 # Convert XML back to DICOM
 #  Reads  $input_dcm and $anon_xml
 #  Writes $output_dcm (must already exist)
-if [[ $verbose -gt 0 ]]; then
+if [[ "${verbose}" -gt 0 ]]; then
 	echo "RUN: CTP_XMLToDicom.py -i ${input_dcm} -x ${anon_xml} -o ${output_dcm}"
 fi
 ${PYTHON} "${SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR}/SRAnonTool/CTP_XMLToDicom.py" \
