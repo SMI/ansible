@@ -52,7 +52,8 @@ fi
 log="${SMI_LOGS_ROOT}/${prog}/${prog}.log"
 mkdir -p "$(dirname "\"""${log}""\"")"
 touch "${log}"
-echo "$(date) $*" >> "${log}"
+date=$(date)
+echo "${date} $*" >> "${log}"
 
 # Error reporting and exit
 tidy_exit()
@@ -60,7 +61,8 @@ tidy_exit()
 	rc=$1
 	msg="$2"
 	echo "${msg}" >&2
-	echo "$(date) ${msg}" >> "${log}"
+	date=$(date)
+	echo "${date} ${msg}" >> "${log}"
 	# Tidy up, if not debugging
 	if [[ "${debug}" -eq 0 ]]; then
 	  if [[ -f "${input_doc}" ]]; then rm -f "${input_doc}"; fi
@@ -86,7 +88,7 @@ case "${var}" in
 	i) input_dcm="${OPTARG}";;
 	o) output_dcm="${OPTARG}";;
 	s) semehr_dir="${OPTARG}";;
-	?) echo "${usage}" >&2; exit 1;;
+	*) echo "${usage}" >&2; exit 1;;
 esac
 done
 shift $((OPTIND - 1))
