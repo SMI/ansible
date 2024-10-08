@@ -10,7 +10,6 @@
 # XXX TODO: copy the input to the output if it doesn't exist?
 
 prog=$(basename "${0%.*}")
-progdir=$(dirname "$0")
 usage="usage: ${prog} [-d] [-v] [-e virtualenv] [-s semehr_root] -i read_from.dcm  -o write_into.dcm"
 options="dve:s:i:o:"
 semehr_dir="${SMI_SEMEHR_TEMP_DIR:-/tmp/semehr}"
@@ -18,6 +17,7 @@ virtenv=""
 debug=0
 verbose=0
 
+# shellcheck disable=SC2034
 if [[ "${SMI_ENV_DIR}" == "" ]]; then
 	echo "${prog}: ERROR: env var SMI_ENV_DIR must be set" >&2
     exit 1
@@ -29,16 +29,19 @@ if [[ ! -f "${PYTHON}" ]]; then
     exit 1
 fi
 
+# shellcheck disable=SC2034
 if [[ "${SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR}" == "" ]]; then
 	echo "${prog}: ERROR: env var SMI_STRUCTUREDREPORTS_APPLICATIONS_DIR must be set" >&2
     exit 1
 fi
 
+# shellcheck disable=SC2034
 if [[ "${SMI_STRUCTUREDREPORTS_SEMEHR_ANON_TASK}" == "" ]]; then
 	echo "${prog}: ERROR: env var SMI_STRUCTUREDREPORTS_SEMEHR_ANON_TASK must be set" >&2
     exit 1
 fi
 
+# shellcheck disable=SC2034
 if [[ "${SMI_LOGS_ROOT}" == "" ]]; then
 	echo "${prog}: ERROR: env var SMI_LOGS_ROOT must be set" >&2
     exit 1
