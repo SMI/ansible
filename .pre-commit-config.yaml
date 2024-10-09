@@ -8,7 +8,7 @@ default_language_version:
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: "v4.6.0"
+    rev: "v5.0.0"
     hooks:
       # General
       - id: check-added-large-files
@@ -88,7 +88,7 @@ repos:
       - id: mypy
         args: [--config-file, .meta/mypy.ini, --scripts-are-modules]
   - repo: https://github.com/psf/black-pre-commit-mirror
-    rev: "24.8.0"
+    rev: "24.10.0"
     hooks:
       - id: black
   - repo: https://github.com/pycqa/flake8
@@ -108,7 +108,7 @@ repos:
         args: [-c, .meta/yamllint.yaml]
   # Ansible
   - repo: https://github.com/ansible/ansible-lint.git
-    rev: "v24.9.0"
+    rev: "v24.9.2"
     hooks:
       - id: ansible-lint
         args:
