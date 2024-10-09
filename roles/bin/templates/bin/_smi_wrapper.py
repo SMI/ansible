@@ -84,7 +84,7 @@ def run(
 def run_smiservices(config_path: str, single_instance: bool = False) -> None:
     wrapper_args, remaining_argv = init()
 
-    if (wrapper_args.copies > 1 or wrapper_args.detach) and single_instance:
+    if wrapper_args.copies > 1 and single_instance:
         raise ValueError(
             "Cannot start more than one copy of this service, or run it detached",
         )
