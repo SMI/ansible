@@ -59,3 +59,10 @@
     requirements: "{{ env_vars.semehr_venv_requirements }}"
     virtualenv: "{{ env_dir }}/venvs/semehr"
   when: env_vars.semehr_venv_requirements is defined
+
+- name: Symlink scripts dir
+  ansible.builtin.file:
+    src: "{{ env_vars.scripts_dir }}"
+    dest: "{{ env_dir }}/scripts"
+    state: link
+  when: env_vars.scripts_dir is defined
