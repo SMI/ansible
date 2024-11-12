@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# {{ ansible_managed }}
+
+(return 0 2>/dev/null) && sourced=1 || sourced=0
+
+if [[ ${sourced} -eq 0 ]]; then
+    echo "Error: Script must be sourced"
+else
+    # shellcheck disable=SC2164
+    cd "${SMI_ROOT:?}/envs/${SMI_ENV:?}/scripts"
+fi
