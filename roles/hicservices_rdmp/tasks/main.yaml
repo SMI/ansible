@@ -15,3 +15,10 @@
         '{{ hicservices_rdmp_versions | to_json }}'
   register: deploy_result
   changed_when: deploy_result.rc != 0
+
+- name: Set rdmp-cli permissions
+  ansible.builtin.file:
+    dest: "{{ hicservices_rdmp_base_dir }}/v{{ item }}"
+    mode: u=rwX,g=rX,o=rX
+    recurse: True
+  with_items: "{{ hicservices_rdmp_versions.keys() }}"
