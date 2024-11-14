@@ -1,0 +1,10 @@
+#!/usr/bin/env python3
+# {{ ansible_managed }}
+import os
+
+import _smi_wrapper as wrapper
+
+wrapper.run_smiservices(
+    os.environ["SMI_SMISERVICES_INGEST_PIPELINE_CONFIG"],
+    single_instance=True,
+)
