@@ -1,6 +1,7 @@
 # {{ ansible_managed }}
 import argparse
 import os
+import shlex
 import subprocess
 import sys
 
@@ -64,7 +65,7 @@ def run(
         print_smi_env()
         if wrapper_args.copies > 1:
             print(f"Executing {wrapper_args.copies} detached instances of:")
-        subprocess.check_call(("echo", "$", *cmd))
+        print(f"$ {shlex.join(cmd)}")
 
     if wrapper_args.detach:
         for _ in range(wrapper_args.copies):
