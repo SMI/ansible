@@ -6,5 +6,6 @@ import _smi_wrapper as wrapper
 
 wrapper.run_smiservices(
     os.environ["SMI_SMISERVICES_INGEST_PIPELINE_CONFIG"],
+    "mapper",
     single_instance=True,
 )

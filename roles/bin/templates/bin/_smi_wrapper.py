@@ -81,7 +81,11 @@ def run(
             pass
 
 
-def run_smiservices(config_path: str, single_instance: bool = False) -> None:
+def run_smiservices(
+    config_path: str,
+    *args: str,
+    single_instance: bool = False,
+) -> None:
     wrapper_args, remaining_argv = init()
 
     if wrapper_args.copies > 1 and single_instance:
@@ -91,5 +95,5 @@ def run_smiservices(config_path: str, single_instance: bool = False) -> None:
 
     smi_bin = os.environ["SMI_SMISERVICES_BIN"]
     app_name = sys.argv[0].rpartition("smi-")[-1]
-    cmd = (smi_bin, app_name, "-y", config_path)
+    cmd = (smi_bin, app_name, *args, "-y", config_path)
     run(wrapper_args, remaining_argv, cmd)
