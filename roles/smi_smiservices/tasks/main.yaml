@@ -14,5 +14,5 @@
         {{ smi_smiservices_base_dir }} \
         '{{ smi_smiservices_versions | to_json }}'
   register: deploy_result
-  changed_when: deploy_result.rc == 0
+  changed_when: deploy_result.rc == 1
   failed_when: deploy_result.rc > 1
