@@ -20,13 +20,14 @@ def main() -> int:
     parser.add_argument("versions", type=json.loads)
     args = parser.parse_args()
 
+    rc = 0
     for version, version_data in args.versions.items():
 
         install_dir = f"{args.install_root}/v{version}"
 
         if os.path.isdir(install_dir):
             print(f"{install_dir} already exists")
-            return 0
+            continue
         os.mkdir(install_dir)
 
         with tempfile.TemporaryDirectory() as tempdir:
@@ -36,7 +37,7 @@ def main() -> int:
                         f"Checksum format not supported: {p['checksum']}",
                         file=sys.stderr,
                     )
-                    return 1
+                    return 2
 
                 package_name = p["name"].replace("<VERSION>", version)
                 url = f"{args.base_url}/v{version}/{package_name}"
@@ -51,7 +52,7 @@ def main() -> int:
                         f"Checksum error. Expected {expected_md5}, got {file_md5}",
                         file=sys.stderr,
                     )
-                    return 1
+                    return 2
 
                 package_ext = package_path.split(".")[-1]
                 if package_ext == "tgz":
@@ -88,7 +89,9 @@ def main() -> int:
             ctp_jar = f"{tempdir}/ctpanonymiser-1.0.0/CTPAnonymiser-portable-1.0.0.jar"
             shutil.copy2(ctp_jar, f"{install_dir}/CTPAnonymiser.jar")
 
-    return 0
+            rc = 1
+
+    return rc
 
 
 if __name__ == "__main__":

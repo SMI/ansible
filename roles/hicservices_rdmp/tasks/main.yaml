@@ -14,7 +14,8 @@
         {{ hicservices_rdmp_base_dir }} \
         '{{ hicservices_rdmp_versions | to_json }}'
   register: deploy_result
-  changed_when: deploy_result.rc != 0
+  changed_when: deploy_result.rc == 1
+  failed_when: deploy_result.rc > 1
 
 - name: Set rdmp-cli permissions
   ansible.builtin.file:
