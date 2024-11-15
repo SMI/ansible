@@ -89,6 +89,7 @@ def main() -> int:
             ctp_jar = f"{tempdir}/ctpanonymiser-1.0.0/CTPAnonymiser-portable-1.0.0.jar"
             shutil.copy2(ctp_jar, f"{install_dir}/CTPAnonymiser.jar")
 
+            print(f"Deployed v{version}")
             rc = 1
 
     return rc

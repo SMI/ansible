@@ -84,6 +84,7 @@ def main() -> int:
                 for f in glob.glob(f"{tempdir}/*.{ext}"):
                     shutil.copy2(f, f"{install_dir}/")
 
+            print(f"Deployed v{version}")
             rc = 1
 
     return rc

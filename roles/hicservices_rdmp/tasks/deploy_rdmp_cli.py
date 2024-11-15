@@ -76,6 +76,7 @@ def main() -> int:
             assert len(rdmp_cli_dir) == 1, f"Expected only one match: {rdmp_cli_dir}"
             shutil.copytree(rdmp_cli_dir[0], f"{install_dir}/rdmp-cli")
 
+            print(f"Deployed v{version}")
             rc = 1
 
     return rc
