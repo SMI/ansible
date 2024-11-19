@@ -8,4 +8,4 @@ and this project adheres to
 
 <!--next-->
 
-## \[0.1.0\] XXXX-XX-XX
+## [0.1.0] XXXX-XX-XX
