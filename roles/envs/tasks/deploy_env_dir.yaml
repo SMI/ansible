@@ -73,3 +73,10 @@
     dest: "{{ env_dir }}/IsIdentifiableRules"
     state: link
   when: env_vars.isidentifiable_rules_dir is defined
+
+- name: Symlink RDMP repo dir
+  ansible.builtin.file:
+    src: "{{ env_vars.rdmp_repo_dir }}"
+    dest: "{{ env_dir }}/rdmp"
+    state: link
+  when: env_vars.rdmp_repo_dir is defined
