@@ -2,8 +2,6 @@
 
 # Ansible
 
-⚠ This repo is in early development ⚠
-
 Automated deployment of the SMI software stack.
 
 The roles in this collection can be used to deploy the following software to a remote target:
