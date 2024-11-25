@@ -66,3 +66,10 @@
     dest: "{{ env_dir }}/scripts"
     state: link
   when: env_vars.scripts_dir is defined
+
+- name: Symlink IsIdentifiable rules dir
+  ansible.builtin.file:
+    src: "{{ env_vars.isidentifiable_rules_dir }}"
+    dest: "{{ env_dir }}/IsIdentifiableRules"
+    state: link
+  when: env_vars.isidentifiable_rules_dir is defined
