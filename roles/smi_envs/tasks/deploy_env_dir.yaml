@@ -7,6 +7,7 @@
 - name: Assert template dir exists
   block:
     - name: Stat template dir
+      delegate_to: localhost
       ansible.builtin.stat:
         path: "{{ __smi_envs_template_dir_for_env }}"
       register: __smi_envs_template_dir_stat
