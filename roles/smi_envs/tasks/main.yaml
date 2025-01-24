@@ -1,0 +1,21 @@
+---
+- name: Ensure required variables are defined
+  ansible.builtin.assert:
+    that: vars[item] is defined
+    fail_msg: "{{ item }} must be defined"
+    quiet: true
+  loop:
+    - smi_envs_template_dir
+    - smi_envs_env_data
+
+- name: Ensure envs dir exists
+  ansible.builtin.file:
+    name: "{{ __smi_envs_envs_dir }}"
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+
+- name: Deploy envs
+  ansible.builtin.include_tasks: deploy_env_dir.yaml
+  loop: "{{ smi_envs_env_data }}"
+  loop_control:
+    loop_var: env_data

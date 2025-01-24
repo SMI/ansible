@@ -1,0 +1,6 @@
+---
+smi_envs_smi_root_dir: "{{ smi_root_dir | default(lookup('env', 'HOME') ~ '/smi') }}"
+
+# These must be supplied by the caller
+# smi_envs_template_dir:
+# smi_envs_env_data:
