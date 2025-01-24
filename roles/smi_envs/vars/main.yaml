@@ -1,0 +1,2 @@
+---
+__smi_envs_envs_dir: "{{ smi_envs_smi_root_dir }}/envs"

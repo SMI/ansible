@@ -1,0 +1,74 @@
+---
+- name: Set facts
+  ansible.builtin.set_fact:
+    __smi_envs_env_dir: "{{ __smi_envs_envs_dir }}/{{ env_data.name }}"
+    __smi_envs_template_dir_for_env: "{{ smi_envs_template_dir }}/{{ env_data.name }}"
+
+- name: Assert template dir exists
+  block:
+    - name: Stat template dir
+      ansible.builtin.stat:
+        path: "{{ __smi_envs_template_dir_for_env }}"
+      register: __smi_envs_template_dir_stat
+    - name: Assert template dir exists
+      ansible.builtin.assert:
+        that: __smi_envs_template_dir_stat.stat.exists and __smi_envs_template_dir_stat.stat.isdir
+        fail_msg: "Expected {{ __smi_envs_template_dir_for_env }} to be a directory"
+        quiet: true
+
+- name: Ensure env dir exists
+  ansible.builtin.file:
+    path: "{{ __smi_envs_env_dir }}"
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+
+- name: Ensure env directory structure exists
+  ansible.builtin.file:
+    path: "{{ __smi_envs_env_dir }}/{{ item.path }}"
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+  with_community.general.filetree: "{{ __smi_envs_template_dir_for_env }}"
+  when: item.state == 'directory'
+
+- name: Ensure files are populated from templates
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    # Make sure to strip ".j2" suffix if one exists
+    dest: "{{ __smi_envs_env_dir }}/{{ item.path | regex_replace('^(.*)\\.j2$', '\\1') }}"
+    mode: u=rw,g=r,o=r
+  with_community.general.filetree: "{{ __smi_envs_template_dir_for_env }}"
+  when: item.state == 'file'
+
+- name: Create venvs dir
+  ansible.builtin.file:
+    path: "{{ __smi_envs_env_dir }}/venvs"
+    state: directory
+    mode: u=rwx,g=rx
+
+- name: Create semehr venv
+  environment: "{{ proxy_env | default({}) }}"
+  ansible.builtin.pip:
+    requirements: "{{ env_data.semehr_venv_requirements }}"
+    virtualenv: "{{ __smi_envs_env_dir }}/venvs/semehr"
+  when: env_data.semehr_venv_requirements is defined
+
+- name: Symlink scripts dir
+  ansible.builtin.file:
+    src: "{{ env_data.scripts_dir }}"
+    dest: "{{ __smi_envs_env_dir }}/scripts"
+    state: link
+  when: env_data.scripts_dir is defined
+
+- name: Symlink IsIdentifiable rules dir
+  ansible.builtin.file:
+    src: "{{ env_data.isidentifiable_rules_dir }}"
+    dest: "{{ __smi_envs_env_dir }}/IsIdentifiableRules"
+    state: link
+  when: env_data.isidentifiable_rules_dir is defined
+
+- name: Symlink RDMP repo dir
+  ansible.builtin.file:
+    src: "{{ env_data.rdmp_repo_dir }}/{{ env_data.name }}"
+    dest: "{{ __smi_envs_env_dir }}/rdmp"
+    state: link
+  when: env_data.rdmp_repo_dir is defined

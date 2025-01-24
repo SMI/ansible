@@ -7,8 +7,13 @@
       tags: [always]
     - role: bin
       tags: [bin]
-    - role: envs
-      tags: [envs]
+    - role: smi_envs
+      vars:
+        smi_envs_template_dir: "{{ playbook_dir ~ '/templates' }}"
+        smi_envs_env_data:
+          - name: example
+            foo: hello
+      tags: [smi_envs]
     - role: smi_smiservices
       tags: [smiservices]
     - role: smi_isidentifiable
