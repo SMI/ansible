@@ -36,7 +36,7 @@ repos:
       - id: nocommit
         exclude: .pre-commit-config.yaml
   - repo: https://github.com/codespell-project/codespell
-    rev: "v2.3.0"
+    rev: "v2.4.1"
     hooks:
       - id: codespell
         args:
@@ -50,7 +50,7 @@ repos:
           ]
   # Markdown
   - repo: https://github.com/executablebooks/mdformat
-    rev: 0.7.21
+    rev: 0.7.22
     hooks:
     - id: mdformat
       additional_dependencies:
@@ -83,12 +83,12 @@ repos:
       - id: yesqa
         additional_dependencies: [pep8-naming==0.14.1]
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v1.14.1"
+    rev: "v1.15.0"
     hooks:
       - id: mypy
         args: [--config-file, .meta/mypy.ini, --scripts-are-modules]
   - repo: https://github.com/psf/black-pre-commit-mirror
-    rev: "24.10.0"
+    rev: "25.1.0"
     hooks:
       - id: black
   - repo: https://github.com/pycqa/flake8
@@ -108,7 +108,7 @@ repos:
         args: [-c, .meta/yamllint.yaml]
   # Ansible
   - repo: https://github.com/ansible/ansible-lint.git
-    rev: "v25.1.0"
+    rev: "v25.1.2"
     hooks:
       - id: ansible-lint
         args:
