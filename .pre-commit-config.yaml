@@ -108,7 +108,7 @@ repos:
         args: [-c, .meta/yamllint.yaml]
   # Ansible
   - repo: https://github.com/ansible/ansible-lint.git
-    rev: "v25.2.1"
+    rev: "v25.4.0"
     hooks:
       - id: ansible-lint
         args:
