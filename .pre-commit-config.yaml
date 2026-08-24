@@ -8,7 +8,7 @@ default_language_version:
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: "v5.0.0"
+    rev: "v6.0.0"
     hooks:
       # General
       - id: check-added-large-files
@@ -36,7 +36,7 @@ repos:
       - id: nocommit
         exclude: .pre-commit-config.yaml
   - repo: https://github.com/codespell-project/codespell
-    rev: "v2.4.1"
+    rev: "v2.4.3"
     hooks:
       - id: codespell
         args:
@@ -50,7 +50,7 @@ repos:
           ]
   # Markdown
   - repo: https://github.com/executablebooks/mdformat
-    rev: 0.7.22
+    rev: 1.0.0
     hooks:
     - id: mdformat
       additional_dependencies:
@@ -64,16 +64,16 @@ repos:
       - id: python-use-type-annotations
       - id: python-no-log-warn
   - repo: https://github.com/asottile/reorder-python-imports
-    rev: "v3.15.0"
+    rev: "v3.17.0"
     hooks:
       - id: reorder-python-imports
         args: [--py310-plus]
   - repo: https://github.com/asottile/add-trailing-comma
-    rev: "v3.2.0"
+    rev: "v4.0.0"
     hooks:
       - id: add-trailing-comma
   - repo: https://github.com/asottile/pyupgrade
-    rev: "v3.20.0"
+    rev: "v3.21.2"
     hooks:
       - id: pyupgrade
         args: [--py310-plus]
@@ -83,16 +83,16 @@ repos:
       - id: yesqa
         additional_dependencies: [pep8-naming==0.14.1]
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v1.16.0"
+    rev: "v2.3.1"
     hooks:
       - id: mypy
         args: [--config-file, .meta/mypy.ini, --scripts-are-modules]
   - repo: https://github.com/psf/black-pre-commit-mirror
-    rev: "25.1.0"
+    rev: "26.5.1"
     hooks:
       - id: black
   - repo: https://github.com/pycqa/flake8
-    rev: "7.2.0"
+    rev: "7.3.0"
     hooks:
       - id: flake8
         additional_dependencies:
@@ -102,13 +102,13 @@ repos:
         args: [--config, .meta/flake8.conf]
   # Yaml
   - repo: https://github.com/adrienverge/yamllint
-    rev: "v1.37.1"
+    rev: "v1.38.0"
     hooks:
       - id: yamllint
         args: [-c, .meta/yamllint.yaml]
   # Ansible
   - repo: https://github.com/ansible/ansible-lint.git
-    rev: "v25.5.0"
+    rev: "v26.8.0"
     hooks:
       - id: ansible-lint
         args:
@@ -118,7 +118,7 @@ repos:
           - jmespath==1.0.1
   # Shell
   - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: "v0.10.0.1"
+    rev: "v0.11.0.1-1"
     hooks:
       - id: shellcheck
         args: [--enable=all]
